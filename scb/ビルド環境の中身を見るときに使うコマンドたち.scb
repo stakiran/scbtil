@@ -1,0 +1,20 @@
+code:commands
+echo ==== OS情報
+cat /etc/os-release
+uname -a
+
+echo ==== ディレクトリコンテキスト
+pwd
+ls -la
+
+echo ==== 環境変数
+export
+
+echo ==== 開発環境(pythonの場合)
+python --version
+pip freeze
+aws --version
+:c
+
+見えづらいので echo で区切りメッセージを出す
+os系、ディレクトリ系、変数系、あとは開発環境系

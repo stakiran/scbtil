@@ -1,0 +1,44 @@
+codebuild初心者で動作環境側イメージ湧かないなら
+ [ビルド環境の中身を見るときに使うコマンドたち]
+terraformバイナリ
+ 公式の yum install terraform は動かないので、zip を直接使う
+ 公式: [Downloads | Terraform by HashiCorp https://www.terraform.io/downloads]
+ [特定のterraformバイナリを入手する]
+aws操作するためのcredentials
+ 事前に操作対象アカウントのaccess/secretを発行しておく
+ それをこのcodebuildを動かすアカウントのsecres managerに入れておく
+  名前は AWS_ACCESS_KEY_ID など正式な環境変数名にする
+  シークレットのキー名は `/CodeBuild/accountX/awscredentials` でも、もっと短くても、なんでもいい
+その他環境変数
+ buildspec.yml の varialbes: でズラズラ定義できる
+
+code:yaml
+version: 0.2
+
+env:
+  secrets-manager:
+    AWS_ACCESS_KEY_ID: /CodeBuild/accountX/awscredentials:AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: /CodeBuild/accountX/awscredentials:AWS_SECRET_ACCESS_KEY
+  variables:
+    ENVVAR1: value1
+    ENVVAR2: value2
+
+phases:
+  install:
+    commands:
+      - echo ==== install terraform
+      - yum -y install wget unzip
+      - wget https://releases.hashicorp.com/terraform/1.2.4/terraform_1.2.4_linux_arm64.zip
+      - unzip ./terraform_1.2.4_linux_arm64.zip -d /usr/local/bin/
+      - terraform --version
+  pre_build:
+    commands:
+      - echo ==== move to workspace ★これ忘れがち……
+      - cd proto/1_otameshi
+      - terraform init
+  build:
+    commands:
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+:c
