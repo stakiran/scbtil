@@ -1,0 +1,9 @@
+[ターゲットグループのヘルスチェック - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/target-group-health-checks.html]
+ ターゲットに、定期的にハートビートを送る
+ 最初に合格する必要がある
+  >ターゲットが最初のヘルスチェックに合格すると、ステータスは Healthy になります。
+  [フェールオープン]って何？
+
+terraform の aws_lb_target_group
+ [aws_lb_target_group | Resources | hashicorp/aws | Terraform Registry https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#health_check]
+ interval, timeout, threshold(healthyとunhealthyの2つ)などがある

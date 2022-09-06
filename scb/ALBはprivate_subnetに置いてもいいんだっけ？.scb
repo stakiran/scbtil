@@ -1,0 +1,58 @@
+context
+ private subnetだけ使うという設計になっている
+ 当然albもprivate subnetに配置することになる
+ が、そもそもできるんだっけ？できるとして、そうしてもいいんだっけ？
+ そのあたりを調べたい
+---
+
+まとめ
+ ダメです
+ alb は public subnet に置かないとダメです
+ 以下に置けって書いてる
+  [Application Load Balancer の作成 - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/create-application-load-balancer.html]
+ あとマネコンからつくったときも「このサブネット、ig無いけど？？」と怒ってくれる
+
+--- 3 マネコン
+
+ちなみに、マネコン > ec2 > ALB で、サブネットの編集ボタンを押せば、ちゃんと警告が出る🐰🐰
+ >インターネット向けロードバランサーを作成中ですが、次のサブネットにはアタッチされたインターネットゲートウェイが存在しません: subnet-XXXXXXXXXXXXXXXXX, 
+ でも俺、これ見ても「albはpublic subnetに置くべき」とまでは理解できないと思う……
+  albをprivate subnetに置いて、natも置いて、んでpublic subnetから外出るようにすればいいんでしょ？と考えてしまう
+ terraformerだったので気づかなかったンゴ🐰
+
+--- 2 aws docs
+
+bingo
+ [Application Load Balancer のトラブルシューティング - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/load-balancer-troubleshooting.html#client-cannot-connect]
+ >クライアントがインターネット向けロードバランサーに接続できない
+  >ロードバランサーがリクエストに応答しない場合は、以下の点を確認します。
+   >インターネット向けロードバランサーがプライベートサブネットにアタッチされている
+    >ロードバランサーのパブリックサブネットを指定する必要があります。パブリックサブネットには Virtual Private Cloud (VPC) のインターネットゲートウェイへのルートがあります。
+
+[Application Load Balancer - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer]
+ 情報なし
+
+[Application Load Balancer の作成 - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/create-application-load-balancer.html]
+ >ロードバランサーはクライアントからリクエストを受け取り、ターゲットグループのターゲット間でリクエストを分散します。開始する前に、ターゲットが使用する各アベイラビリティーゾーンで少なくとも 1 つのパブリックサブネットを持つ Virtual Private Cloud (VPC) があることを確認します。
+ これはLBというよりTGの話🐰
+ TGが使うAZは少なくとも1つのpublicsubnetが要る、とまでしか言っていない
+  albはpublicに置かないとダメ、とまでは言っていない
+
+--- 1 ググる
+ 情報が出てこない
+ が、public subnet に置け、という空気は感じる
+
+❌Q: これは？
+ [インターネットに公開する ELB は Private Subnet に配置してはいけない - Qiita https://qiita.com/hoto17296/items/b097214640bdcc6413e2]
+ 違う
+  これは配置先としてpublicとprivateを混ぜているせいで、az間の配置に片方public片方privateが混ざってバグる、みたいな話🐰
+  今回問題にしたいのは「配置先はprivate subnetのみ」
+
+✅Q: これは？
+ [【初心者向け】ELBからプライベートサブネットへのアクセスに困った話 - サーバーワークスエンジニアブログ https://blog.serverworks.co.jp/alb-private-subnet]
+ alb を private subnet に置いただけでは導通しない
+ ので、public subnet に置いてみたら動いたよって話
+
+[プライベート IP アドレスを持つ EC2 インスタンスをインターネット向け ELB ロードバランサーにアタッチする https://aws.amazon.com/jp/premiumsupport/knowledge-center/public-load-balancer-private-ec2/]
+ >プライベートサブネットにある Amazon EC2 インスタンスをアタッチするには、バックエンドインスタンスで使用されるプライベートサブネットと同じアベイラビリティーゾーンにパブリックサブネットを作成します。次に、パブリックサブネットをロードバランサーに関連付けます。
+ albはpublic subnetに置かないとダメ、なのかしら？🐰
