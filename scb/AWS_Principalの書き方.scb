@@ -1,0 +1,25 @@
+[AWS JSON ポリシーの要素: Principal - AWS Identity and Access Management https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html]
+ >AWS アカウントおよびルートユーザー
+  "AWS": "123456789012"
+  "AWS": "arn:aws:iam::123456789012:root"
+  ↑ どちらも同義。上は下の書き方のエイリアス
+ >IAM ロール
+  "AWS": "arn:aws:iam::AWS-account-ID:role/role-name"
+ >ロールセッション
+  "AWS": "arn:aws:sts::AWS-account-ID:assumed-role/role-name/role-session-name"
+ >IAM ユーザー
+  "AWS": "arn:aws:iam::AWS-account-ID:user/user-name"
+ >フェデレーティッドユーザーセッション
+  "Federated": "accounts.google.com" 
+  "Federated": "arn:aws:iam::AWS-account-ID:saml-provider/provider-name"
+  "AWS": "arn:aws:sts::AWS-account-ID:federated-user/user-name"
+ >AWS のサービス
+  >サービスプリンシパルの識別子にはサービス名が含まれ、通常は次の形式になります。
+   >`service-name.amazonaws.com`
+  "Service": "elasticloadbalancing.amazonaws.com"
+ >すべてのプリンシパル  
+  "*"
+  "AWS" : "*"
+  ↑ どちらも同義。上は下の書き方のエイリアス
+
+で、[AWS service principal の一覧]は？

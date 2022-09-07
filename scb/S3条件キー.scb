@@ -1,0 +1,11 @@
+[Amazon S3 のアクション、リソース、条件キー - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/list_amazons3.html#amazons3-policy-keys]
+
+`s3:`で始まる
+
+例
+ s3:x-amz-grant-read
+ s3:x-amz-acl
+ s3:versionid
+飛ばされるリファレンスはまちまち
+ x-amz系は[この辺 https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/acl-overview.html#permissions]だが、versionidは[この辺 https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/amazon-s3-policy-keys.html#getobjectversion-limit-access-to-specific-version-3]だったりしている
+

@@ -1,0 +1,3 @@
+[Amazon S3 を使用して静的ウェブサイトをホスティングする - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/WebsiteHosting.html]
+ >Amazon S3 ウェブサイトエンドポイントは HTTPS をサポートしていません。HTTPS を使用する場合は、Amazon CloudFront を使用して Amazon S3 でホストされている静的ウェブサイトを提供できます。
+

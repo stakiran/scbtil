@@ -1,0 +1,9 @@
+[バケットポリシーの例 - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-bucket-policies.html]
+ principal にアカウントIDを並べる案
+ principal * にする案（匿名アクセス）
+ principal * にして、condition に条件を書く案
+ principal に aws リソースの arn を指定する案
+ principal に `storage-lens.s3.amazonaws.com` みたいな aws リソースのサービスエンドポイント？を指定する案
+
+[AWS Principalの書き方]
+[S3のConditionの書き方]

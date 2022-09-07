@@ -4,6 +4,12 @@ AWSトラシューテクニック
  [マネコンの各画面を全部見ろ]
 
 2022/09/05w
+[ALBから直にS3に転送する感じのフロントエンドは茨の道]
+[S3静的サイトはHTTPSをサポートしていない]
+[バケットポリシーの書き方の例]
+ [AWS Principalの書き方]
+  [AWS service principal の一覧]
+ [S3のConditionの書き方]
 [ALBはprivate subnetに置いてもいいんだっけ？]
 [Internet GatewayとPublic Subnet Private Subnetを理解する]
 [ALBのヘルスチェック is 何]

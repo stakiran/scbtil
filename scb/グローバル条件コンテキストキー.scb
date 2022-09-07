@@ -1,0 +1,7 @@
+[AWS グローバル条件コンテキストキー - AWS Identity and Access Management https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_condition-keys.html]
+
+`aws:`がつく
+
+例
+ aws:SourceIp
+ aws:CurrentTime

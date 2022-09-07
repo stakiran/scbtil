@@ -1,0 +1,69 @@
+例 [Amazon S3 条件キーの例 - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/amazon-s3-policy-keys.html]
+ 詳細 [Amazon S3 の条件キー - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/amazon-s3-condition-keys.html]
+ リファレンス [Amazon S3 のアクション、リソース、条件キー - Amazon Simple Storage Service https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/list_amazons3.html]
+
+3 リファレンス
+ 条件キーは[グローバル条件コンテキストキー]
+ S3固有のキーは[S3条件キー]
+
+2 詳細を読む
+ 有効になる場合、を指定せよ
+  >オプションの Condition エレメントまたは Condition ブロックを使用して、ポリシーが有効になるときの条件を指定します。
+ `条件キー: 値`
+ 条件キー
+  `aws:`はじまりは[グローバル条件コンテキストキー]と呼ぶ
+  S3固有は[S3条件キー]
+
+1 例を読む
+ "condition"
+  "オペランド名"
+   "左辺値をキー名で": "右辺値を値で"
+ `左辺値 オペランド 右辺値`
+  左辺値はキー名でないといけない
+  右辺値は値でないといけない
+
+code:例を抜粋
+ "Condition": {
+   "StringEquals": {
+     "s3:x-amz-grant-full-control": "id=AccountA-CanonicalUserID"
+   }
+ }
+
+ "Condition": {
+     "StringEquals": {
+         "s3:x-amz-grant-full-control": "id=AccountA-CanonicalUserID"
+     }
+ }
+
+ "Condition": {
+     "StringNotLike": {
+         "s3:x-amz-copy-source": "awsexamplebucket1/public/*"
+     }
+ }
+
+ "Condition": {
+     "StringNotEquals": {
+         "s3:VersionId": "AaaHbAQitwiL_h47_44lRO2DDfLlBO5e"
+     }
+ }
+
+ "Condition": {
+   "StringEquals": {
+     "s3:x-amz-storage-class": [
+       "STANDARD_IA"
+     ]
+   }
+
+ "Condition": {
+     "NumericLessThan": {
+         "s3:TlsVersion": 1.2
+     }
+ }
+
+ "Condition": {
+     "NumericGreaterThan": {
+         "s3:TlsVersion": 1.1
+     }
+ }
+:c
+
