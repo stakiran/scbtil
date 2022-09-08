@@ -1,0 +1,53 @@
+まとめ
+ cognitoにおけるコールバックurlとは、redirect_urlのこと
+  サインインに成功したときにリダイレクトされる先
+ たぶんこんな感じ
+  https://XXXX/oauth2/idpresponse
+  認証成功したら https://XXXX に飛ばす
+  認証失敗したら 401 とか出す
+ 内部的には
+  https://XXXX.auth.ap-northeast-1.amazoncognito.com/oauth2/authorize?パラメーター
+  こんなurlが呼ばれてる
+  パラメーターとしてclient_id, redirect_uri, scope, stateなどがあるね
+
+--- 1 調査
+
+背景
+ [aws_lb_listener_ruleのauthenticate-cognito is 何]によると、ALBはcognitoのユーザープールに認証処理を投げてる
+ 認証失敗したらどうなるの？
+ ALB側ではその辺の定義や言及がない
+ これを俺は「最終的にcognito側のコールバックURLなる概念に飛ばされる（から失敗時の処理もくそもない）」と理解している
+  つまりcognitoに投げた時点で、ALB側の役割は終えている
+  あとはcognito側で何を表示するかという話
+ で、その最終的に表示するものがコールバックURLではないか？
+  https://(ALB-DNSNAME)/oauth2/idpresponse
+  https://(YOUR-APPLICATION-DNS-CNAME)/oauth2/idpresponse
+  ↑ こんな感じだから、認証成功したら https://(ALB-DNSNAME)/ にredirectする、とかしてんじゃね？🐰
+
+ダイレクトにアクセスしたら？
+ https://(ALB-DNSNAME)/oauth2/idpresponse をアドレスバーにはりつけるとか
+ 401 Authorization Required が出た🐰
+
+ブラウザの履歴見ていると、長ったらしいパラメータがあった
+ https://XXXX.auth.ap-northeast-1.amazoncognito.com/oauth2/authorize?
+ &
+  client_id=XXXXXXXXXXXXXXXXXXXXXXXXXX
+  redirect_uri=https……oauth2%2Fidpresponse
+  response_type=code
+  scope=XXXX
+  state=XXXXXXXXXXXXX……(めちゃ長い)
+ ---
+ コールバックurlなるものは、どうやらredirect_urlにセットされているようだが🐰
+
+aws docs
+ [ユーザープールのアプリクライアントの設定 - Amazon Cognito https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-user-pools-app-idp-settings.html]
+  >コールバック URL は、ユーザーがサインインに成功したときにリダイレクトされる先を指定します。少なくとも 1 つのコールバック URL を選択してください。コールバック URL は、以下が必要です。
+   >絶対 URI である。
+   >クライアントに事前登録されている。
+   >フラグメントコンポーネントを含まない。
+ これも見ろだって →[RFC 6749: The OAuth 2.0 Authorization Framework https://www.rfc-editor.org/rfc/rfc6749#section-3.1.2]
+  deepl says
+   > リソース所有者との対話が完了すると、認可サーバはリソース所有者のユーザエージェントをクライアントに戻す。
+   >認可サーバは，クライアント登録時または認可要求時に認可サーバと事前に設定したクライアントのリダイレクトエンドポイントに，ユーザエージェントをリダイレクトする。
+ 要するに oauth2.0 がリダイレクトエンドポイント使う言うてるからそうしてまーすってわけね🐰
+

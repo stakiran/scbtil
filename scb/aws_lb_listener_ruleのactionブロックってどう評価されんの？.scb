@@ -1,0 +1,63 @@
+結論
+ 確たる根拠や設定値は見当たらなかった
+ が、雰囲気的には以下で良いと思う
+  マネコンレベルでは上から定義すればいい
+  terraformでも、たぶん上から定義すればいい
+
+authenticate-cognito 等のactionが失敗したときにどうなるかがまだわからん
+ condition当てはまらなかった場合と同じってこと？
+ それともコールバックurl叩いてるからそっちの動作次第？
+ わかんね🐰
+
+--- 1 調査
+
+code:たとえばこの場合どうなるん？.tf
+  action {
+    type = "authenticate-cognito"
+    authenticate_cognito {
+      user_pool_arn       = aws_cognito_user_pool.xxxx.arn
+      user_pool_client_id = aws_cognito_user_pool_client.xxxx.id
+      user_pool_domain    = aws_cognito_user_pool_domain.xxxx.domain
+    }
+  }
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.xxxx.arn
+  }
+:c
+ 上から見てって失敗したらそこで終わり？
+
+マネコンでは？
+ THENというタイトルで、この定義と同じ順で表示されている
+
+terraformは？
+ [aws_lb_listener_rule | Resources | hashicorp/aws | Terraform Registry https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule]
+ 見た感じ、
+  基本的にaction blockは一つや
+  でも認証系の場合は認証系block書いた後、forwardとかredirectみたいな動作系を書け、の2段階
+
+aws docsは？
+ [Application Load Balancer のリスナー - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/load-balancer-listeners.html]
+ >順番の値が最も小さいアクションが最初に実行されます。
+ >各ルールには次のアクションのうち、厳密に 1 つを含む必要があります。
+  >forward、redirect、fixed-response
+  >またはそれは最後に実行されるアクションである必要があります。
+ supported
+  forward
+  redirect
+  fixed-response
+  authenticate-cognito
+  authenticate-oidc
+ なので実質「authenticate-*」を先に行った後、最後に3つのどれかをやるしかない🐰
+順番の値って何？
+ prioみたいな属性はねえけど？🐰
+ terraformにも「上から定義すればいいよ」的な記述ねえけど？
+
+awscliは？
+ [elbv2 — AWS CLI 1.25.68 Command Reference https://docs.aws.amazon.com/cli/latest/reference/elbv2/index.html#cli-aws-elbv2]
+  [create-rule — AWS CLI 1.25.68 Command Reference https://docs.aws.amazon.com/cli/latest/reference/elbv2/create-rule.html]
+   > Rules are evaluated in priority order, from the lowest value to the highest value. 
+    内部的には「小さい値から実行」
+   だけど、これ、リスナーの順番だよな？🐰
+   俺が知りたいのは「リスナー内のactionの順番」なんだが🐰🐰
+ なさそう

@@ -1,0 +1,25 @@
+[aws_lb_listener_rule | Resources | hashicorp/aws | Terraform Registry https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule]
+ type
+  forward
+  redirect
+  fixed-response
+  authenticate-cognito ★これ
+  authenticate-oidc
+ 最低限はuserpool arn, domain, cliend idがあればいい
+
+[Application Load Balancer を使用してユーザーを認証する - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/listener-authenticate-users.html#cognito-requirements]
+ 1 userpoolつくれ
+ 2 userpoolのクライアントつくれ
+ 3 userpoolのドメインつくれ
+ あとはcognito側やIdPアプリ側のコールバックurlを設定しろ
+  cognito
+   https://(ALB-DNSNAME)/oauth2/idpresponse
+   https://(YOUR-APPLICATION-DNS-CNAME)/oauth2/idpresponse
+  IdP
+   https://(domain-prefix).auth.region.amazoncognito.com/saml2/idpresponse
+   https://(user-pool-domain)/oauth2/idpresponse
+
+つまりALBとしてはauthenticate-cognito指定して関連づければいいだけ🐰
+
+🚃
+ [aws_lb_listener_ruleのactionブロックってどう評価されんの？]
