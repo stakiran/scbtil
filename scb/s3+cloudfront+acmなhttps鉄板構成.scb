@@ -1,0 +1,28 @@
+まとめ
+ cloudfrontのoriginをつくって、s3バケットを指定
+ s3側はwebsiteにする必要はない（せずに表示させられる設定がある）
+ DNSはcloudfrontのurlを指させる with Aレコード
+ ネットでしらべた限りでは、default cache behavior のみ使っている
+  customi cache behavior を使った複数ルートの例はない🐰
+
+---
+
+[CloudFront を使用して Amazon S3 バケットに対する HTTPS リクエストを処理する https://aws.amazon.com/jp/premiumsupport/knowledge-center/cloudfront-https-requests-s3/]
+ 1 cloudfrontつくる
+ 2 1にoriginつくって、s3につなげる
+ 3 1に代替ドメイン名とカスタムSSL証明書を設定する
+  もちろん事前にDNSとACM certを作っておく必要がある
+ s3は静的サイトでもいいしrest apiエンドポイントでもいい
+  後者だと公開にならないので良いんじゃね？🐰
+
+[【AWS】S3+CloudFront+Route53+ACMでSSL化(https)した静的Webサイトを公開する https://zenn.dev/wakkunn/articles/66a6e8372611dc]
+ s3への直接アクセスは、cloudfrontのOAIってので防げるらしい
+  >Origin Access Identity→Create a New Identity
+   >オリジンアクセスアイデンティティ(OAI)を作成する
+  >Grant Read Permissions on Bucket→Yes, Update Bucket Policy
+   >作成したOAIをS3のバケットポリシーに自動で記載してくれる
+  で、その後s3の方でパブリックアクセスをブロックしている
+  よーわからんけど、結局s3をrest apiエンドポイントとして使ってるってこと？🐰
+[CloudFront で S3 静的ウェブサイトホスティングを SSL/TLS に対応させる | DevelopersIO https://dev.classmethod.jp/articles/tls-for-s3-web-hosting-with-cloudfront/]
+ >CloudFront経由でのアクセスであれば、S3の静的ウェブサイトホスティングは無効化して問題ありません。
+ うん、やっぱりrest apiエンドポイント使うのがベターっぽいな🐰
