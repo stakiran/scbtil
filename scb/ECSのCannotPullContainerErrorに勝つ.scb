@@ -1,0 +1,8 @@
+[Amazon ECS の「CannotPullContainerError」の解決方法 https://aws.amazon.com/jp/premiumsupport/knowledge-center/ecs-pull-container-error/]
+ これ見ろ🐰
+ 1 インターネットに出れるか？public subnetは？igは？natは？route tableは？
+ 2 SGは大丈夫か？
+  [AWS SGが複数枚ついたときの挙動はどうなる？]
+ 3 vpcエンドポイントは足りてるか？
+ 4 タスク実行ロールのIAMは足りてるか？
+ etc

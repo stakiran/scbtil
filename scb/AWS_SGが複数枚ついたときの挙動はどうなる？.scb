@@ -1,0 +1,20 @@
+[セキュリティグループのルール - Amazon Elastic Compute Cloud https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/security-group-rules.html]
+ >セキュリティグループルールは、セキュリティグループに関連付けられたインスタンスに到達することを許可するインバウンドトラフィックを制御します。また、このルールによって、インスタンスから送信されるアウトバウンドトラフィックも制御されます。
+  SGをXにつけるとは、Xへの到達を許すかどうかを判定するファイアウォールをつけるということ
+ >デフォルトでは、セキュリティグループには、すべてのアウトバウンドトラフィックを許可するアウトバウンドルーセキュリティグループのルールは常にパーミッシブです。アクセスを拒否するルールを作成することはできません。
+  デフォは deny all
+  allowだけつけることができる
+ >セキュリティグループはステートフルです。インスタンスからリクエストを送信すると、そのリクエストに対するレスポンストラフィックは、セキュリティグループのインバウンドルールにかかわらず、流入できます。つまり、VPC セキュリティグループの場合、アウトバウンドルールにかかわらず、許可されたインバウンドトラフィックは流れることができます。詳細については、「セキュリティグループの接続の追跡」を参照してください。
+  行きが通ったのなら、レスポンスの帰りは設定に関係なく通る
+ >ルールの追加と削除は随時行うことができます。変更は、セキュリティグループに関連付けられたインスタンスに自動的に適用されます。
+  リアルタイム反映
+ >複数のセキュリティグループをインスタンスに関連付けると、各セキュリティグループのルールが効率的に集約され、1 つのルールセットが作成されます。Amazon EC2 はこのルールセットを使用して、アクセスを許可するかを判断します。
+  そこが知りたいところなんですけど🐰🐰
+
+[amazon ec2 - Multiple EC2 security groups - permissive or restrictive? - Server Fault https://serverfault.com/questions/483938/multiple-ec2-security-groups-permissive-or-restrictive]
+ だよな、ORだよな？🐰🐰
+ >For example, lets say I have a class of instances that will only ever talk to other instances in the same account. I also have a class of instances that will only accept traffic via http (port 80).
+  内部フル導通と、外部はhttpのみ、という場合、両方働く
+ この挙動をどう一言で言えばいいかはわからんけど🐰
+  「ルール全部チェックして」「allowがあれば通す」「denyがあれば通さない」「当てはまるものがなければ通さない」 ← こう？
+   つまりallowを先にチェックするアルゴリズム

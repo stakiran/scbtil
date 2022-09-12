@@ -1,0 +1,24 @@
+code:tf
+  lifecycle {
+    ignore_changes = [
+      policy,
+    ]
+  }
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+:c
+ 無視したい属性を指定する
+
+使い所は？
+ terraform以外の何かor誰かがリソースを更新するシチュのとき
+ 何もしないと、terraform apply時にそいつらの変更を殺してしまうので、このignoreを使う
+
+[The lifecycle Meta-Argument - Configuration Language | Terraform by HashiCorp https://www.terraform.io/language/meta-arguments/lifecycle]
+ 作成時は無視されない
+  >作成操作の計画時に考慮されますが、更新の計画時には無視されます。
+ allも使える
+  >リストの代わりに特殊なキーワードallを使用すると、Terraformにすべての属性を無視するように指示できます。これは、Terraformがリモートオブジェクトを作成および破棄することはできますが、更新を提案することはないということを意味します。
+ メタ引数は無視できない

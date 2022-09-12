@@ -1,0 +1,13 @@
+アーキテクチャの違いで発生するらしい
+🐰
+ codebuild側が`aws/codebuild/amazonlinux2-aarch64-standard:2.0`で起きた
+ ECS側のアーキテクチャがこれ(ARM64)じゃないってこと？
+  codebuildで `--platform linux/arm64` で docker build してもダメだった
+  ECSがAMDだから、そもそもARM64はダメってことなのかな？🐰
+  知らね
+ ---
+ Solved
+  codebuild側、`aws/codebuild/amazonlinux2-x86_64-standard:3.0"`のような`LINUX_CONTAINER`を使うようにしたら通った
+ Ref
+  [ECSのタスク起動時に「standard_init_linux.go」関連のエラーが出た場合の対処方法 | DevelopersIO https://dev.classmethod.jp/articles/how-to-fix-standard-init-linux-error/]
+  その4
