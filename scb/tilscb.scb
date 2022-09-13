@@ -4,6 +4,9 @@ AWSトラシューテクニック
  [マネコンの各画面を全部見ろ]
 
 2022/09/05w
+[ALBのログを見る]
+[terraform show 指定リソースの設定値を見る]
+[タスクロールとタスク実行ロール]
 [ECSのCannotPullContainerErrorに勝つ]
 [ECSでexec format error]
 [AWS SGが複数枚ついたときの挙動はどうなる？]

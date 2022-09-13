@@ -1,0 +1,5 @@
+一番はやいのは
+ 1 `terraform show -no-color | clip`
+ 2 エディタにはりつけて、あとはよしなに
+
+`terraform show -json | jq ……` もありだが、jqわかんねぇ🐰

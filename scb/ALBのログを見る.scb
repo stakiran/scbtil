@@ -1,0 +1,20 @@
+s3に保存しているはず
+ 明示的に設定しないと保存されない
+間隔
+ 5分ごと
+
+path
+ バケット名/AWSLogs/アカウント名/elasticloadbalancing/リージョン名/yyyy/mm/dd
+file
+ アカウント名_elasticloadbalancing_リージョン名.LB種類.LB名.…….log.gz	
+  最後のtimestampは記録終了側の時刻、ipaddrはこのリクエストを処理したロードバランサーのIP
+ ファイル名が長くなりすぎて windows では開けないことがあるので、適当にリネームしてから扱う🐰
+
+見方
+ 1行1ログ
+ スペースで区切ってある
+ [ALBのアクセスログをS3に保存して中身を読み解いてみる | DevelopersIO https://dev.classmethod.jp/articles/alb-log-to-s3/]
+ [Application Load Balancer のアクセスログ - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/load-balancer-access-logs.html]
+
+ヘルスチェックは記録しません
+ >Elastic Load Balancing は、ターゲットに到達しなかったリクエストを含め、ロードバランサーに送信されたリクエストを記録します。たとえば、クライアントが誤った形式のリクエストを送信した場合や、リクエストに応答できる正常に動作しているターゲットがない場合も、そのリクエストは記録されます。Elastic Load Balancing はヘルスチェックリクエストをログに記録しません。
