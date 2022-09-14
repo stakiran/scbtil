@@ -1,0 +1,36 @@
+https://former2.com/
+https://github.com/iann0036/former2
+
+根拠
+ 1 githubにソース公開されてます
+ 2 公式サイトにランチされてるやつもminifyされてないです
+  ちなjQuery
+ 3 変な処理入れてたら騒ぎになるでしょ？
+ なってないので、大丈夫では？
+
+ちなソースは、localStorage にいったん入れた後、new AWS.credentials()
+ https://former2.com/js/app.js
+ つまり「ローカルストレージに入れてるだけや」🐰
+ちなホスト先はs3
+ https://github.com/iann0036/former2/blob/master/.github/workflows/main.yml#L23
+
+これを理解できない人たちがいちいち自前で環境つくっているンゴ
+
+q:ローカルストレージから漏れたらどうするねん？
+ ans: 注意すればokです
+ [Cookieとlocal storageの話でよく参照されてる記事にすごく疑問がある https://zenn.dev/noonworks/scraps/5c29df99433fe8]
+  [CheatSheetSeries/HTML5_Security_Cheat_Sheet.md at master · OWASP/CheatSheetSeries https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/HTML5_Security_Cheat_Sheet.md#local-storage]
+ 要するに、
+  ブラウザに保存してるので、同じPC使える人にはまあ見えるわね
+  ドメインが同じ場合は自由に読めちゃうので、注入されるとXSSやられちゃうね
+ 端的にはこっちがわかりやすいかな
+  [typescript - Is it possible to read other application's localstorage in angular 2? - Stack Overflow https://stackoverflow.com/questions/55539700/is-it-possible-to-read-other-applications-localstorage-in-angular-2]
+  >ローカルストレージは、同じドメイン上のどのスクリプトでも利用できます。別のドメインからローカルストレージにアクセスしたい場合は、そのドメインにスクリプトをホストしてもらう必要があります。ちなみにこれは、ローカルストレージに対するクロスサイトスクリプティング攻撃の基本です。ドメインが互いのストレージにアクセスできないようにするのは、設計上のセキュリティであるというのは正しい。
+
+q: former2の作者さんがs3設定ミスってたらどうするねん？
+ ans: アウトやね
+
+ここでどっちに倒すかが人それぞれですねぇ
+ まあ安全サイドに倒すか🐰🐰🐰
+ 俺もそうするわね
+  逆張りしたくて深掘りしてみたけどダメだったｗ

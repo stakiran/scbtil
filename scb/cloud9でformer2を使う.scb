@@ -1,0 +1,24 @@
+terraformコード出したい
+
+see
+ 1 [Former2 を Cloud9にホストする – プー太's Blog https://poota.net/archives/400]
+ 2 [[Former2][Terraform] AWS既存環境を楽にコード化したい – Inomaso Blog https://www.inomaso.com/post/2020/12/former2-terraform-import/]
+
+まずはcloud9
+ 1のブログコピペでいける
+ git cloneする前に設定必要
+ code:aa
+  git config --global user.name "xxx"
+  git config --global user.email "xxx"
+ :c
+ tools > preview > preview running application
+
+続いてformer2
+ 1 chdome拡張を入れる
+  今開いてるブラウザに入れる
+ 2 credentialsは適当に設定
+ 3 default outputをterraformにする（それ以外はデフォでスルー） > go to dashboard
+ ---
+ するとリソース選択画面が出るので、ほしいものを選択してSelect
+ 最後にGenerateボタン
+ コードが出るので、コピペする
