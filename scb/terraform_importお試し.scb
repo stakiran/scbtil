@@ -1,0 +1,11 @@
+terraform import (resource-path) (realworld-id)
+
+AWSの場合
+ 1 terraformでスケルトンつくれ
+ 2 AWSからidをもってこい
+  arnではない
+  たとえばcloudfrontならXXXXXXXXXXXXXXだし、instanceならinstance id
+ 3 resource-pathに1で書いたものを、realworld-idに2を入れて実行
+
+そもそも[terraform import is 何]
+

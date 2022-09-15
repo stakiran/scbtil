@@ -1,0 +1,12 @@
+importしたのを直してるというシチュ
+明らかにno-diffなのに、一回全部消してまた全部追加するみたいなdiffになっている
+
+[Adding a New CloudFront Origin Causes All Other Origins to be Redeployed · Issue #12065 · hashicorp/terraform-provider-aws https://github.com/hashicorp/terraform-provider-aws/issues/12065]
+ そうそう、これこれ🐰🐰
+ >Diffing the output of my plan showed that for each existing origin, "origin_path": "" != "origin_path": null. Adding origin_path = "" to each existing origin meant they would no longer be modified.
+ 入れてもまだ起こるんですけど🐰
+ 謎
+  originが2つあって、origin1では何も起きないけど、origin2では常に起きる
+  `origin_path = ""`は入れても消してもダメ
+
+ググっても他に情報ないし、あとはソース見て原因探るくらいしかねーな……

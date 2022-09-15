@@ -4,7 +4,10 @@ AWSトラシューテクニック
  [マネコンの各画面を全部見ろ]
 
 2022/09/12w
+[cloudfrontのoriginでreplace的なdiffが出るのなんで？ on terraform]
+[terraform importお試し]
 [cloud9でformer2を使う]
+[former2はコピペで少し楽できる程度ですね]
 [former2は安全だと思うんですけど]
 [curlでオレオレ証明書突破するには--insecure]
 [curlでヘッダだけ見るには-I、ヘッダも見るには-i]
