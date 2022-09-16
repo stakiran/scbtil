@@ -4,6 +4,9 @@ AWSトラシューテクニック
  [マネコンの各画面を全部見ろ]
 
 2022/09/12w
+[aws secrets managerをterraform importする]
+[terraformで指定リソースを状態から削除する state rm remove]
+[カナリアリリースとBlueGreenデプロイ]
 [cloudfrontのoriginでreplace的なdiffが出るのなんで？ on terraform]
 [terraform importお試し]
 [cloud9でformer2を使う]
