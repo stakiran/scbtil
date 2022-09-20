@@ -1,0 +1,58 @@
+まとめ
+ traffic-portとは、TGのヘルスチェック時に指定するポートの値
+ 通常は1-65536を指定するが、`traffic-port`という文字列値を指定できる
+  terraformの場合
+  マネコンだと「トラフィックポート」というラジオボタンになっている
+ 意味は、「そのTGが開いているポートと同じものを使う」
+
+---
+
+[CreateTargetGroup - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html]
+ >HealthCheckPort
+ >The port the load balancer uses when performing health checks on targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, or TCP_UDP, the default is traffic-port, which is the port on which each target receives traffic from the load balancer. If the protocol is GENEVE, the default is port 80.
+ deepl
+  >プロトコルが HTTP、HTTPS、TCP、TLS、UDP、または TCP_UDP の場合、デフォルトは traffic-port で、これは各ターゲットがロードバランサーからトラフィックを受信するポートです。
+  意味わからん
+  ポートは番号だろうが🐰🐰
+[ターゲットグループのヘルスチェック - Elastic Load Balancing https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/network/target-group-health-checks.html]
+ >HealthCheckPort
+ >ターゲットでヘルスチェックを実行するときにロードバランサーが使用するポート。デフォルトでは、各ターゲットがロードバランサーからトラフィックを受信するポートが使用されます。
+ traffic-portとは「各ターゲットがロードバランサーからトラフィックを受信するポート」、ということ？
+  意味わからん🐰
+  だからそのポート番号は何なんだよって話
+
+[aws_lb_target_group | Resources | hashicorp/aws | Terraform Registry https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#health_check]
+ terraformではデフォで`traffic-port`になってる
+ 1-65536でポート番号を指定することもできるようだが
+
+[Application Load Balancerで設定する4種類のポート番号の意味を理解しよう | DevelopersIO https://dev.classmethod.jp/articles/aws-alb-port/]
+ TGまわりにはポート指定箇所が4つある
+  バカじゃない？🐰
+  こんな煩雑なの人間が扱う代物じゃないだろう
+  AWSは本当に設計が下手
+  いや設計というか名前がね🐰🐰🐰
+   「トラフィックポート」じゃなくて「use this TG's port」とか「same as this TG's port」みたいなネーミングでいいだろ
+   trafficという言葉のどこに「TGが開いてるポートと同じポートを使います」的な意味があるの？
+   中の人のネーミングセンスどうなってるの？いやまじで？？
+ code:仕方ないのでノート取るけど
+ 
+       1        2                3
+   ---> ALB ---> TargetGroup ---> Target
+         |           A
+       4 |           |
+         +-----------+
+ :c
+ 1 外部 to ALBの段階で、ALBが受けるポート
+ 2 ALB to TGの段階で、TGが受けるポート
+ 3 TG to Targetの段階で、Targetが受けるポート
+  普通は2が使われるが、type=instance の場合、個別にec2インスタンスを（targetとして）追加できる
+  このときに、使うポートを上書きすることができるってのがこの3
+ 4 ALB to TGの段階で、ヘルスチェックするときに、ALBが投げるポート
+  >今回はHTTP:3000で受け付けている想定をし設定します､トラフィックポートにチェックを入れるとルーティング(overwrite)と同じポートが自動的に設定されます｡基本的にはトラフィックポートにチェックを入れて使用します｡
+  つまりtraffic-portは、2と同じポートを使いますってことか🐰🐰
+ ---
+ 改めて🐰
+  バカじゃない？
+  煩雑すぎて無理でしょこれ……
+  それともこういうのも平然と扱える奴こそがエンジニアってことなの？
+

@@ -1,0 +1,23 @@
+まずは単位を押さえろ
+ ステップ(%)
+ 間隔(分)
+
+概念はこうや
+ リニアは「間隔分」ごとに「ステップ%」だけ移行する
+ カナリーは最初に「ステップ%」移行して、残りは「間隔分」後に移行する
+
+もう少し噛み砕く
+ リニアは、
+  n分ごとにX%だけ移行する
+  線形的でシンプル
+ カナリーは、
+  まず最初にX%だけ移行する。最初に一気に特定割合をもう移行させちゃう。
+   つまりそいつらがカナリア（人柱）なわけだ🐰
+  で、残りはn分後に移行する
+   たとえば120分とした場合、120分間人柱した後に、残りを移動させるわけだ🐰
+
+see [AWS再入門ブログリレー2022 AWS CodeDeploy 編 | DevelopersIO https://dev.classmethod.jp/articles/re-introduction-2022-codedeploy/#toc-3]
+ >CodeDeployDefault.ECSLinear10PercentEvery3Minutes
+  > すべてのトラフィックが移行されるまで、3分ごとにトラフィックの10パーセントを移行します。
+ > CodeDeployDefault.ECSCanary10Percent5Minutes
+  > 最初の増分でトラフィックの10パーセントを移行します。残りの90パーセントは5分後にデプロイされます。

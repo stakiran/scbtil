@@ -1,0 +1,69 @@
+知りたい
+ ECRへのpushの後、そのイメージをつかってタスク再配置する部分をつくれるらしい
+ BlueGreenデプロイができるらしい
+---
+
+[チュートリアル: Amazon ECS サービスをデプロイする - AWS CodeDeploy https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/tutorial-ecs-deployment.html]
+ step1: タスク定義つくってるだけ
+ step2: appspec.yaml書いて、step1のタスク定義とか指定してるだけ
+ step3: 
+  applicationをつくる
+  deploygroupをつくる
+  deployをつくる
+   ここではgithubを選んでる（appspecをgithubにアップしてる想定）
+  で、もうデプロイが走ってる
+要するにタスク定義使ってるだけ🐰
+
+[チュートリアル: Amazon ECR ソースと ECS-CodeDeploy 間のデプロイでパイプラインを作成する - AWS CodePipeline https://docs.aws.amazon.com/ja_jp/codepipeline/latest/userguide/tutorials-ecs-ecr-codedeploy.html]
+ 1 dockerイメージつくってECRに入れてるだけ
+ 2
+  1 タスク定義をつくっている / taskdef.json
+   実際に登録している（`aws ecs register-task-definition ...`）
+  2 appspec.yamlをつくっている
+   この例ではコンテナ名、ポート、あと`<TASK_DEFINITION>`とかいうおまじないの指定くらい
+  3 1と2をcodecommitにアップしている
+   repo1/
+    taskdef.json
+    appspec.yaml
+  つまりタスク定義を実際に登録しつつ、その定義を「appspecと同じ場所」に置く必要がある🐰
+ 3 ALBとTGをつくる
+ 4 ECS Cluster と Service をつくる
+ 5 CodeDeploy Application と DeployGroup をつくる
+ 6 パイプラインをつくる
+  1 ソースステージはcodecommit
+  2 ビルドステージはスキップ
+  3 デプロイステージはAmazon ECS (Blue/Green)、で以下が要る
+   codedeploy application
+   codedeploy deploygroup
+   タスク定義(SourceArtifact 選んで taskdef.json を指定)
+   AppSpec(SourceArtifact 選んで appspec.json を指定)
+  で、あとは以下のtipsも紹介されてる
+   >Amazon ECR ソースアクションをパイプラインに追加するには
+   >ソースアーティファクトをデプロイアクションに関連付けるには
+ ---
+ 要するに🐰
+  タスク定義とappspecをつくって、一箇所に置け
+  タスクのデプロイは、ApplicationとDeployGroupという世界観でできるので、まあつくれ
+  パイプラインでは ECS(Blue/Green) なるアクションプロバイダーがあるのでそれ使え
+ で、あとはまあ細かい値の（アーティファクト経由での）受け渡しをごにょごにょするだけだろ？
+
+CodeDeployとは、要するに、 by 昔書いたノート
+ 以下のデプロイをサポート
+  ec2
+  lambda
+  ecs
+ メリット
+  1 アプリごとに「こういうデプロイがしたい」ってのを設定としてつくれること
+   デプロイグループ
+  2 デプロイをカナリアリリース的に進行させることができること
+   [デプロイ設定のリニアとCanary]
+ 仕組み(ECSを例にする)
+  1 appspec.yamlを書いて、s3やgithubなどにアップロードしておく
+   codecommitも行けるんだよなたぶん？🐰
+  2 CodeDeployは、1から取得したyamlに従ってデプロイ処理を行う
+   基本的にはタスク定義使って、所定のECSクラスターの所定のTGの先で起動するだけ
+   ---
+   これに加えて便利機能がいくつかあるというだけの話
+    カナリアリリース的な段階的デプロイができること
+    その段階的デプロイの前後でフックスクリプトを実行できること（appspecのhooks:）
+  デプロイグループ等はただの単位の話
