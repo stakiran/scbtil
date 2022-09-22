@@ -1,5 +1,5 @@
 terraform state rm aws_iam_role.role_abc
-terraform state -dry-run rm aws_iam_role.role_abc
+terraform state rm -dry-run aws_iam_role.role_abc
 
 すでに消してるのを指定するとエラーになる
  >Error: Invalid target address

@@ -1,0 +1,14 @@
+en
+ [Update behaviors of stack resources - AWS CloudFormation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt]
+jp
+ [スタックのリソースの更新動作 - AWS CloudFormation https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt]
+
+まとめると、
+ CFnでリソースを更新するとき、値を更新するだけでも「いやすまん、これ作り直さないと無理だわ」なパターンがある
+ どのリソースのどの値がどのパターンかは、CFnのドキュメントに書いてある
+  例:[AWS::CloudFront::Distribution Origin - AWS CloudFormation https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origin.html]
+ パターンの種類
+  1 普通に更新できます（No Interruption）
+  2 停止が必要です（Some Interruption）
+  3 再作成が必要です（作り直し。Replacement）
+

@@ -7,9 +7,12 @@
 
 戦略
  importで取り込み、コードを書いて、planして差分を潰していく
- コード書くところ端折りたいなら、former2など「既存環境からコードつくってくれる」ツールを使うのもアリ
+ ただし、
+  リアルワールド側が作り直されてる場合、terraform 側は will be created になるので、いったん state rm で状態から消す
+  コード書くところ端折りたいなら、former2など「既存環境からコードつくってくれる」ツールを使うのもアリ
  see
   [terraform importお試し]
+  [terraformで指定リソースを状態から削除する_state_rm_remove]
   [cloud9でformer2を使う]
 
 知見1: コミュニケーション難しい問題と忍耐
@@ -37,4 +40,13 @@
   cloudfront の public_key
   ecs service の task definition（常に最新リビジョン使う or 指定リビジョン固定しかできない）
   ecs task の container_definition
- 
+ why？
+  内部的にAWSSDK使ってて、そっちで「この値変えた場合は作り直しにするしかない」的な制約があるのでは？🐰
+  CFnのドキュメントであったはず
+   [AWS::CloudFront::PublicKey PublicKeyConfig - AWS CloudFormation https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-publickey-publickeyconfig.html]
+   [AWS::CloudFront::Distribution Origin - AWS CloudFormation https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origin.html]
+   だけどどっちも no interruption だけどなー……🐰🐰
+    [AWS CloudFormationのNo InterruptionとかReplacementとか]
+   CFnとawssdkは違うってことか？
+   わからないよー
+
