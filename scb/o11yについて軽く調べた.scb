@@ -1,0 +1,106 @@
+[「Observability（オブザーバビリティ）」「可観測性」とは何か――クラウドネイティブにおける監視で必要な理由と考慮点、お薦めのOSSの組み合わせ：Cloud Nativeチートシート（13） - ＠IT https://atmarkit.itmedia.co.jp/ait/articles/2202/25/news014.html]
+ >システムを観測可能、つまり「いつ、何が、どこで起こっているのかを観測可能に保つ」考え方です。
+ マイクロサービスはあちこちで色んなもんうごいてて連携してるので、そいつら追えないといけない🐰
+
+[モニタリングとオブザーバビリティ | AWS マネジメントとガバナンス https://aws.amazon.com/jp/products/management-and-governance/use-cases/monitoring-and-observability/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc&blog-posts-cards.sort-by=item.additionalFields.createdDate&blog-posts-cards.sort-order=desc]
+ >「オブザーバビリティ」とは、システムで何が起こっているかをどれだけ理解できるかを示すもので、多くの場合、メトリクスやログ、トレースを収集するためにシステムをインストルメント化することで実現します。
+  観測可能にするため仕込む
+ >クラウドでは、システムが非常に複雑なため、オブザーバビリティを実現するのが難しい場合があります。データセンターでもクラウドでも、オペレーショナルエクセレンスを達成し、ビジネス目標を達成するためには、システムのパフォーマンスを把握する必要があります。オブザーバビリティソリューションは、アプリケーションやインフラストラクチャからデータを収集および分析することで、その内部状態を把握し、アプリケーションの可用性やパフォーマンスに関する問題のアラート、トラブルシューティング、解決を行い、エンドユーザーエクスペリエンスを向上させることができます。 
+  把握するために割と何でもやる感じ
+ >モニタリングは、トレースやログ記録など他のアクティビティと並んで、システムを観測可能にするアクティビティです。モニタリング、トレース、ログ記録を「オブザーバビリティの 3 本柱」と表現しているのをよく見かけます。 しかし、後述するプロファイラーや AI/Ops など、オブザーバビリティを実現するためのツールは他にもあります。
+  モニタリング、トレース、ログが3本柱
+  他にも色々ある
+ モニタリング
+  パフォーマンスの統計を長期的に記録する
+ テレメトリー
+  エージェントなどでインストルメント化して収集できるようにすること
+  モニタリングするために必要
+ プロファイリング
+  一定間隔でサンプリングする
+ メリット3
+  customer experienceの向上。早く原因わかってつぶせるのでmttrを下げれる。
+  developer experienceの向上。早く原因がわかってつぶせるので精神衛生に良い。ヒントが見える。
+  コスト削減。コストやばいところに気づいたり、予測もできるみたいだね。
+ aws services
+  CloudWatch ログとメトリクス
+  X-Ray トレース
+  CodeGuru Profiler プロファイリング
+  DevOps Guru AWSサービスから運用データ読み込んで機械学習で「ここヤバいで」とか教えてくれる感じ
+ oss例
+  opentereletry
+  prometheus
+  grafana
+  Amazon OpenSearch Service
+
+モニタリングとプロファイリングの違いは？
+ [What is the difference between monitoring and profiling? - Stack Overflow https://stackoverflow.com/questions/24441687/what-is-the-difference-between-monitoring-and-profiling#:~:text=Monitoring%20%3D%20keeping%20an%20eye%20on,how%20long%20each%20step%20takes.]
+  monitoringは動いてることを見る、profilingはパフォーマンスをはかる
+  monitoringは開発後にやる、profilingは開発前（中？）にやる
+ [What's difference between monitoring, tracing and profiling? - Server Fault https://serverfault.com/questions/446956/whats-difference-between-monitoring-tracing-and-profiling]
+  monitoringは監視で、普通は自動化する
+  profilingは特定プログラムに対して行うもので、性能ボトルネックを見る
+   主にcpu
+
+[第15回 可観測性？Observabilityって？ | IBM ソリューション ブログ https://www.ibm.com/blogs/solutions/jp-ja/container-cocreation-center-15/]
+ 1 モニタリングはインフラを見てた。問題置きてから対応してた
+ 2 APM(Application Performance Management)ではアプリも監視し始めた。
+ 3 o11y。1とか2とか活かしてデータドリブンにする
+  >これまでの監視が、問題が起きたあと「調べれば分かる」に対して、「いま起きていることをデータに基づいて説明できる、改善できる」状況に持っていくものが 可観測性（Observability）だと考えます。
+ ここでも3本柱
+  メトリックはPrometheus、Grafana
+  トレースはZipkin、Jaeger
+  ログはFluentd、LogStash
+ この記事はIBMなのでOpenShiftやら何やらゴリ押しだけど……🐰
+
+[Observabilityをはじめよう！(前編) 〜Observabilityの背景と構成要素〜 | さくらのナレッジ https://knowledge.sakura.ad.jp/26395/]
+ 今どきの分散システムはそもそも先頭から順に追いかけるのが無理ゲー
+  極論、Twitterは何千何万と分散している。全部手作業で探すのか？無理でしょって話
+ 分散システムは本質的にカオスなので、障害は「起きる」
+ テレメトリー
+  >Telemetryは「Observabilityを実現するツールに求められる要素」と思ってください。Telemetryには主に、Metrics、Logging、Tracingの3つがあります。
+  これがいわゆる3本柱か🐰
+  トレースはリクエストに対するイベントを
+  ログはコンポーネントに対するイベントを
+  メトリックはサービスを定量的に数字として記録
+ メトリック
+  これを使うといわゆるアラートもできるようになる
+  指標一つだと意味ないし、一瞬でも意味がない
+   複数指標 + 時系列が要る
+   が、データありすぎてもストレージ圧迫してしんどい
+ ログ
+  実装は楽
+  人間が見るもの
+  これもデータ容量注意、あと横断に弱い
+ トレース
+  リクエストのライフサイクルを横断的に見る
+  レイテンシも測れる
+  実装難度が高い。アプリ側にも仕込む必要がある
+  最近の概念なのであまり知見がないらしい
+ 重要なのは各要素の関連付け
+  >たとえばMetricsの情報からログが見えたり、Metricsの情報からTracingが追えたり、逆にTracingからログが追えたり、というような形で、ある何かをキーにして、別の要素にアプローチできるのがObservabilityです。
+
+[オブザーバビリティ（可観測性）とは何か？を学べる「Distributed Systems Observability」を読んだ - kakakakakku blog https://kakakakakku.hatenablog.com/entry/2020/05/25/064548]
+ [Distributed Systems Observability]
+  メアド登録すればDLできるらしいよ🐰
+ モニタリングは問題検出のための第三のアプローチ
+  1 テスト
+  2 モニタリング（監視）
+  3 o11y
+ 4大シグナル
+  レイテンシ
+  トラフィック
+  エラー
+  [サチュレーション(インフラ)]
+ USEメソッド
+  使用率 (Utilization)
+  飽和 (Saturation)
+  エラー (Errors)
+ [REDメソッド]
+ ---
+ トレースはインフラ全体に組み込むのが難しい
+  [サービスメッシュ]で解決できるらしいよ
+ アプリレベルでちゃんと作り込まないといけない
+  devopsすらできない現場では程遠そうですねぃ🐰
+ devopsに新たな仲間が加わった感じだね🐰
+  >例えば「スプリントゼロで CI/CD パイプラインを作る」というプラクティスのように「スプリントゼロでオブザーバビリティを導入する」というプラクティスまで応用できると良さそう．
+  CI/CDみたいな概念がもう一つできた、みたいな

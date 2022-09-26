@@ -1,0 +1,12 @@
+一言で
+ すべてのコンテナに「サイドカーパターンでProxyを入れて」、そのProxyで通信させよう的な概念
+ 通信や連携まわりをProxy層に任せられる
+ セキュリティ機能も入れてる
+
+>Kubernetesが事実上コンテナオーケストレーションの標準となっているように、Istioが現在サービスメッシュの標準と考えられています。
+
+see
+ [サービスメッシュ入門 | ネットワンシステムズ https://www.netone.co.jp/knowledge-center/netone-blog/20200715-1/]
+ [サービスメッシュについて調査してみた件 - Qiita https://qiita.com/mamomamo/items/92085e0e508e18bc8532]
+ [サービスメッシュがコンテナ管理Kubernetesで必要な理由｜NGINX技術ブログ https://www.nginx.co.jp/blog/do-i-need-a-service-mesh/]
+ [サービスメッシュの選び方 https://www.nginx.co.jp/blog/how-to-choose-a-service-mesh/]
