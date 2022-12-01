@@ -1,0 +1,53 @@
+keys または keys_unsorted
+
+例
+ https://raw.githubusercontent.com/microsoft/winget-cli/master/schemas/JSON/manifests/v1.0.0/manifest.singleton.1.0.0.json
+
+基本はこう
+ code:aaa
+  # cat winget_manifest.json | jq ".properties | keys"
+  [
+    "Author",
+    "Capabilities",
+    "Channel",
+    "Commands",
+    "Copyright",
+    "CopyrightUrl",
+    "Dependencies",
+    "Description",
+    "FileExtensions",
+    "InstallModes",
+    "InstallerLocale",
+    "InstallerSuccessCodes",
+    "InstallerSwitches",
+    "InstallerType",
+    "Installers",
+    "License",
+    "LicenseUrl",
+    "ManifestType",
+    "ManifestVersion",
+    "MinimumOSVersion",
+    "Moniker",
+    "PackageFamilyName",
+    "PackageIdentifier",
+    "PackageLocale",
+    "PackageName",
+    "PackageUrl",
+    "PackageVersion",
+    "Platform",
+    "PrivacyUrl",
+    "ProductCode",
+    "Protocols",
+    "Publisher",
+    "PublisherSupportUrl",
+    "PublisherUrl",
+    "RestrictedCapabilities",
+    "Scope",
+    "ShortDescription",
+    "Tags",
+    "UpgradeBehavior"
+  ]
+ :c
+
+ソートさせたくないなら keys_unsorted
+ cat winget_manifest.json | jq ".properties | keys_unsorted"
