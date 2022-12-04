@@ -1,0 +1,20 @@
+code:py
+def get_corrected_filename(filename):
+    # Use algorithm og https://github.com/stakiran/vscode-scb/blob/master/language-feature/src/util.ts#L29
+    invalid_chars ='\\/:*?"<>|'
+    noisy_chars =' '
+    target_chars = invalid_chars + noisy_chars
+
+    after_char = '_'
+
+    ret = filename
+    for target_char in target_chars:
+        ret = ret.replace(target_char, after_char)
+    return ret
+:c
+
+ [Windowsでファイル名として使えない文字]
+ afterは状況次第
+  ここでは scb ライクに _ で補っているが、空文字で補って潰してもいい
+ space自体は使える
+  が、windows ではややこしいので、潰してしまった方が楽🐰
