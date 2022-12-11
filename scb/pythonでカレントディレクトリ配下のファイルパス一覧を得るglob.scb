@@ -1,0 +1,18 @@
+ネストしない場合
+ code:py
+ import glob
+ import os
+
+ def directory2filepathes(directory):
+     query = os.path.join(
+         directory,
+         '*.scb',
+     )
+     filepathes = glob.glob(query, recursive=False)
+     return filepathes
+ :c
+ネストする場合、以下二点
+ ワイルドカード
+  `query = '{}/**/*.url'.format(favorites_dir)`
+ オプションも有効に
+  `recursive=True`

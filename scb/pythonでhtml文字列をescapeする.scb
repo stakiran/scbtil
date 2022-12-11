@@ -1,0 +1,6 @@
+code:py
+def escape(s):
+    return html.escape(s, quote=True)
+:c
+ htmlパッケージが持ってる
+ "" とかも潰したければ quote を Trueに

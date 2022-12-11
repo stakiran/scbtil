@@ -1,9 +1,13 @@
 [方針]
  📝 書きかけ
 
-AWSトラシューテクニック
- [マネコンの各画面を全部見ろ]
-
+2022/12/12w
+ [pythonでhtml文字列をescapeする]
+ [pythonでfilenameやbasenameを得る]
+ [python argparseテンプレート]
+ [pythonでカレントディレクトリ配下のファイルパス一覧を得るglob]
+ [xcopyでファイルを上書き確認せずにコピーする]
+ [マネコンの各画面を全部見ろ] 格言問題でどうせ無理なのでもうおしまい
 2022/11/28w
  [PythonでWindowsで無効なファイル名 invalid chars を潰す]
  [jqでkeyの一覧を出す]

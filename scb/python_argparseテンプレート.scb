@@ -1,0 +1,22 @@
+code:dobuの例.py
+def parse_arguments():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+
+    parser.add_argument('--input-single', default=None)
+    parser.add_argument('-i', '--input-directory', default=False)
+
+    parser.add_argument('-o', '--output-directory', default=None)
+
+    parser.add_argument('--html-stylesheet', default=None)
+    parser.add_argument('--html-template', default=None)
+
+    args = parser.parse_args()
+    return args
+
+if __name__ == "__main__":
+    args = parse_arguments()
+:c
