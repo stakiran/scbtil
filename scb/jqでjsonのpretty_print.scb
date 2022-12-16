@@ -1,0 +1,3 @@
+jq . aaa.json
+ [text formatting - How to prettyprint json using jq standalone? - Unix & Linux Stack Exchange https://unix.stackexchange.com/questions/244946/how-to-prettyprint-json-using-jq-standalone]
+ そうか、jqはパイプで渡すのが前提だから jq aaa.json みたいな引数指定ではないのか🐰

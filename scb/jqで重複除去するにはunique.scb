@@ -1,0 +1,9 @@
+code:aaa
+ cat sbom_2022-12-16_123456.json | jq "[.packages[].downloadLocation] | unique"
+ [
+   "NOASSERTION"
+ ]
+:c
+ ❌`jq .packages[]...`
+ 🔴`jq [.packages[]...`
+  リストに対してフィルタをかけるので、`[]`でくくってリスト化する必要がある
