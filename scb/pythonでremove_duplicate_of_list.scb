@@ -1,0 +1,8 @@
+code:py
+def remove_duplicates_from_list(ls):
+    # テストコードの関係でリストの順番を壊したくないので keep order する
+    #  https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order
+    #  py3.7+ で可能なやり方
+    #return list(set(ls))
+    return list(dict.fromkeys(ls))
+:c
