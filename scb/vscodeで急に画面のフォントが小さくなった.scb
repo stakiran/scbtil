@@ -1,0 +1,6 @@
+>VSCode の画面上で Ctrl を押し続けながら + ( Shift + ; ) を試してみましょう。 
+ [VS Code の文字が急に小さくなってしまいました - プログラミングならドットインストール https://dotinstall.com/questions/pr94rnp]
+
+view: zoom in/out という操作になるようだ
+ デフォでは`ctrl + shift + ;/-`に割り当てられている
+

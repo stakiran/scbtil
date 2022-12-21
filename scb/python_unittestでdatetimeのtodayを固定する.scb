@@ -1,0 +1,13 @@
+unittest.mock を使う系はうまくいかなかった
+ ビルトインモジュールは mock でも上書きできない
+ なので単純に継承してオーバーライド + datetime.datetimeをオーバーライドした側に変える、で
+
+code:py
+import datetime
+
+class datetime_FixedToday(datetime.datetime):
+    @classmethod
+    def today(cls):
+        return cls(2020, 4, 1, 12, 34, 56)
+datetime.datetime = datetime_FixedToday
+:c

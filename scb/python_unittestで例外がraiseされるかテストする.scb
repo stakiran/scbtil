@@ -1,0 +1,4 @@
+code:py
+with self.assertRaises(RuntimeError):
+    state.is_in_code_block()
+:c
