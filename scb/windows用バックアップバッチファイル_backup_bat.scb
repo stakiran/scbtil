@@ -1,0 +1,38 @@
+[7z]で圧縮したあと、コピーは手動に任せる
+ code:bat
+  @echo off
+  setlocal
+
+  pushd "%~dp0"
+  rem set bin="C:\Program Files\7-Zip\7z.exe"
+  set bin="D:\bin1\scoop\shims\7z.exe"
+
+  %bin% a data.zip "D:\data"
+  %bin% a chrome_default.zip "%localappdata%\Google\Chrome\User Data\Default" -xr!*Worker* -xr!*Cache* -xr!*IndexedDB* -xr!*Extensions*
+  %bin% a gitlab.zip "D:\work\gitlab" -xr!*node_modules* -xr!*.git* -xr!*.terraform* -xr!*.dist* -xr!*.html*
+
+  echo 手動で Box Webにコピーすること。
+
+  pause
+ :c
+ 7zのコマンドラインオプションゲー
+  余計なフォルダを`-xr!*KEYWORD*`で除外するのがポイント
+
+指定フォルダ内の各フォルダをzip圧縮する
+ code:bat
+  set oddjobdir=D:\work_oddjob
+  for /F "usebackq tokens=*" %%n in (`dir %oddjobdir% /b /ad`) do (
+      %bin% a %%n.zip %oddjobdir%\%%n
+  )
+ :c
+ これは雑務用フォルダのバックアップの例
+ バッチファイルの文法がトリッキーできつい
+
+終了が必要な場合
+ code:bat
+  echo Outlook を終了してください....
+  pause
+  echo OK?
+  pause
+ :c
+ echoとpauseで促す

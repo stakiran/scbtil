@@ -2,6 +2,8 @@
  📝 書きかけ
 
 2022/12/19w
+ [ドライブの空き容量確認はfsutil volume disktree]
+ [windows用バックアップバッチファイル backup bat]
  [python unittestでdatetimeのtodayを固定する]
  [python unittestで例外がraiseされるかテストする]
  [vscodeで急に画面のフォントが小さくなった]

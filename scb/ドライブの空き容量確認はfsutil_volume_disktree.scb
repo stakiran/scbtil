@@ -1,0 +1,7 @@
+code:ala用.ini
+ [restc]
+ rawbin=fsutil volume diskfree c:
+
+ [restd]
+ rawbin=fsutil volume diskfree d:
+:c
