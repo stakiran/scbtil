@@ -2,6 +2,8 @@
  📝 書きかけ
 
 2022/12/19w
+ [sortedのkeyに指定するlambdaの書き方]
+ [pythonのsortはasc昇順、desc降順にしたければreverse]
  [ドライブの空き容量確認はfsutil volume disktree]
  [windows用バックアップバッチファイル backup bat]
  [python unittestでdatetimeのtodayを固定する]

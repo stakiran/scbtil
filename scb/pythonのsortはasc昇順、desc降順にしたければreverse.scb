@@ -1,0 +1,10 @@
+全然覚えられないので切った
+ code:py
+  l = [5,3,2,4,6,1]
+  sorted_l = sorted(l)
+  print(sorted_l) # [1, 2, 3, 4, 5, 6]
+  sorted_l.reverse()
+  reversed_l = sorted_l
+  print(reversed_l) # [6, 5, 4, 3, 2, 1]
+ :c
+ [sorted()が複製をつくるので、そのまま破壊的なreverse()をすればよい]

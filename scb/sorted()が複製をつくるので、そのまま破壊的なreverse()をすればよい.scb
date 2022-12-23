@@ -1,0 +1,3 @@
+紛らわしいが、pythonのreversed(a_list)はiteratorを返す
+ sorted()みたいに複製を返すわけじゃない
+じゃあどうやってreverseの複製を手に入れるかだが、元々sorted()で複製が手に入ってるはずなので、それをそのままreverse()してしまえばよい
