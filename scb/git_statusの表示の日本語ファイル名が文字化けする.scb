@@ -1,0 +1,11 @@
+[git diff や git status での日本語の文字化けを防ぐ (core.page, core.quotepath) - まくまくGitノート https://maku77.github.io/git/settings/garbling.html]
+code:この辺
+ gitconfig
+ $ git config --global core.pager "LESSCHARSET=utf-8 less"
+ 
+ あるいは
+ $ git config --global core.quotepath false
+
+ windowsの場合、環境変数LANG
+ LANG=ja_JP.UTF-8
+:c
