@@ -2,8 +2,9 @@
  📝 書きかけ
 
 2023/01/02w
- %localappdata%\MongoDBCompass\MongoDBCompass.exe
- (install_dir)\bin\mongod.exe --config "(install_dir)\bin\mongod.cfg" --service
+ [mongodbの薄い本]
+ [mongo系のpath]
+ [mongoshell]
  [Google日本語入力でタスクバーにaとかAとか出るのを消す]
  [git statusの表示の日本語ファイル名が文字化けする]
 2022/12/19w

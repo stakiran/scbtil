@@ -1,0 +1,8 @@
+for windows.
+
+mongoshell
+ `mongosh.exe`をPATHに通している形、というか自分で通す
+compass
+ `%localappdata%\MongoDBCompass\MongoDBCompass.exe`
+mongod
+ `(install_dir)\bin\mongod.exe --config "(install_dir)\bin\mongod.cfg" --service`
