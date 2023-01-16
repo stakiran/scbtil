@@ -27,6 +27,17 @@ find
  db.unicorns.find({gender: 'm', weight: {$gt: 700}})
  db.unicorns.find({loves: 'watermelon'})
  https://www.mongodb.com/docs/manual/reference/operator/query/#query-selectors
+ 表示フィールドのフィルタ(projection)
+  db.unicorns.find({loves: 'watermelon'}, {name: 1, _id: 0})
+ sort
+  db.unicorns.find().sort({name: 1, vampires: -1})
+  1が昇順で、-1が降順
+ paging
+  db.unicorns.find().sort({weight: -1}).limit(2).skip(1)
+   >2番目と3番目に重たいユニコーン
+   上位2件を出しているが、skipで1番目を省いてるので2,3番目🐰
+ count
+  db.unicorns.find({vampires: {$gt: 50}}).count()
 
 update
  updateコマンド使えない
@@ -58,3 +69,31 @@ updateのmulti(複数同時更新)
  db.unicorns.update({}, {$set: {vaccinated: true }}, {multi:true});
   multi trueでall document
 
+データモデリング
+ mongoにはjoinが無い
+  代案1 フィールドにドキュメントを入れる
+   RDBではフィールドに1つのスカラー値しか入れられないので、テーブルがどうしても分かれる
+   mongoではフィールドにドキュメントも入れられるので、必要な値がドキュメント一箇所に集まる
+   あとはfindで見つければいい
+   クエリ時に結合するのではなく、データ側で最初からまとめて入れておけるって話？🐰
+  代案2 非正規化
+   RDBでは必要な情報はjoinする（外部キーの値を使って別テーブルから取ってきて結合する）
+   mongoでは最初からドキュメントに入れておくことができる
+    たとえばuseridとusernameは、普通はテーブルを分けるが、username使うから`(userid, username)`にしちゃうか、みたいなこともできる
+    ただしこの場合、usernameの修正が入ったら、フィールドの値全部も再修正が要る
+ 使い分けのヒント
+  ドキュメントサイズは16MBまで
+  たいていは親と一緒にほしい小さなデータを埋めることになるはず
+   >埋め込みドキュメントは頻繁に利用されますが、ほとんどの場合親ドキュメントと同時に取得したい小さなデータです。
+   ユーザー情報に住所`{street: "229 W. 43rd St", city: "New York", state:"NY",zip:"10036"}`を埋め込む例が載ってる🐰
+  RDBのテーブルの多くは、mongoのコレクションで置き換えることができる
+  mongoのコレクションは、おそらくRDBのテーブルよりは少なくて済む
+  ドキュメントを埋め込みつつ、別にコレクションをつくるというハイブリッドもできる
+   >posts コレクションと comments コレクションを別々に持つべきか、postドキュメントにコメントの配列を埋め込むべきでしょうか?
+   >MongoDB の柔軟なスキーマはこの 2 つのアプローチを組み合わせて、別々のコレクションに分けたまま、少ない数のコメントを投稿に埋め込む事が出来ます。これは 1 回のクエリーで欲しいデータをまとめて取得するという原則に従っています。
+   コメントが10以下ならpostsに埋め込んで、10超えたらcommentsに移そう、みたいなことができるわけか🐰
+ なるほど
+  下手にテーブル（コレクション）分けるのが正義ではない、と
+
+next
+ 5
