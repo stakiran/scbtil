@@ -1,0 +1,8 @@
+以下をバックアップする
+ `%appdata%\WinAuth`
+  winauth.xml
+
+リストア時は、
+ 1 winauthを起動する
+  上記保存場所がつくられる
+ 2 バックアップしてたxmlを配置
