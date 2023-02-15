@@ -1,0 +1,33 @@
+[Git フック | Atlassian Git Tutorial https://www.atlassian.com/ja/git/tutorials/git-hooks]
+
+.git/hooks
+ デフォで.sampleファイルがある
+
+スクリプトはsh以外もいける
+ `#!/usr/bin/env python`
+
+フック自体はバージョン管理されない
+ フックスクリプトをバージョン管理 + シンボリックリンクなどで.git/hookに張るとかすれば可能
+
+フックについて
+ preとpostがある
+  preはダメだったら操作中止とかできる
+  postはできなくてただの通知用途
+ ローカルフックとサーバーサイドフックがある
+  ローカルはローカルリポジトリ配下にある。そのディレクトリでのみ有効
+  サーバーサイドはサーバー側にフックがあって、処理もそっちでやって、開発者側にはその結果が表示される
+ サーバーサイドはGitHubなどサービス側で設定することになる
+  [Pre-receive フックを使って作業する - GitHub Enterprise Server 3.7 Docs https://docs.github.com/ja/enterprise-server@3.7/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/working-with-pre-receive-hooks]
+
+ローカルフック
+ Pre-Commit
+ prepare-commit-msg
+ commit-msg
+ Post-Commit
+ Post-Checkout
+ Pre-Rebase
+サーバーサイドフック
+ Pre-Receive
+ Update
+  コミットごとに呼び出される。4コミット分pushしてるのなら4回。
+ Post-Receive
