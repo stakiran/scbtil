@@ -1,0 +1,28 @@
+いまいちわからん
+ 結局どれをセットすればいいの？
+ 大文字小文字で4パターン全部設定するの？ｗ🐰
+
+curlでは
+ [curl - How To Use https://curl.se/docs/manpage.html]
+ >http_proxy [protocol://]<host>[:port]
+  >Sets the proxy server to use for HTTP.
+ >HTTPS_PROXY [protocol://]<host>[:port]
+  >Sets the proxy server to use for HTTPS.
+ httpを使うなら小文字のhttp、httpsを使うなら大文字のHTTPS
+
+他のツールのソース(requestsとかawscliとか）も見てみようとしたけど、`http_proxy`とか`proxy`で検索する程度じゃ何もわからんかった……🐰
+
+大文字小文字
+ Windows/Linuxで違うよな
+  Linuxだと区別する
+  Windowsでは区別しない
+ 慣習では大文字で書く
+ 環境変数読む側のツールがどうしてるかは不明
+  が、言語側では区別するので、別物として扱うはず
+ ---
+ 要素多すぎて何がなにやら……🐰
+
+[network - HTTPS PROXY とはなんですか - スタック・オーバーフロー https://ja.stackoverflow.com/questions/48481/https-proxy-%E3%81%A8%E3%81%AF%E3%81%AA%E3%82%93%E3%81%A7%E3%81%99%E3%81%8B]
+ sayuriさんという人
+  ああ、[FFFTP]の人か🐰
+ >この辺りの環境変数に明確な規定はなく、プログラム毎に独自の解釈がされています。
