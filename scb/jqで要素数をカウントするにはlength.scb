@@ -1,0 +1,2 @@
+length
+ `cat result_by_trivy.json | jq ".files | length"`

@@ -1,0 +1,66 @@
+まとめ
+ 1: オブジェクトの配列を得る
+  `jq ".keyname[]"`
+ 2: 表示したいkey-valueを選ぶ
+  `| {custom_keyname1:.original_keyname1, custom_keyname2:.original_keyname2, ...}`
+  表示したいoriginal keyを、custom keynameに変えて表示する
+
+基本形
+ `cat sbom_by_trivy.json | jq ".packages[] | {name:.name}"`
+ code:こうなる
+  {
+    "name": "golang.org/x/sync"
+  }
+  {
+    "name": "github.com/golang/snappy"
+  }
+  ...
+ :c
+flattenを使えばさらに
+ ただし`flatten`だけだと`{}`が`[]`になるだけ
+  `flatten[]`までしないとただの一覧を取れない
+ `cat sbom_by_trivy.json | jq ".packages[] | {name:.name} | flatten[]"`
+ code:こうなる
+  "name": "golang.org/x/sync"
+  "name": "github.com/golang/snappy"
+  ...
+ :c
+さらに重複除去
+ かなりややこしいが、
+  1: uniqueは配列にしか使えないので、全体を`[]`で囲うことで配列化
+  2: uniqueをかます
+   ちなみにソートも勝手にかかる
+ `cat sbom_by_trivy.json | jq "[.packages[] | {name:.name} | flatten[]] | unique"`
+ code:こうなる
+  [
+    "github.com/golang/snappy",
+    ...
+    "golang.org/x/sync",
+    ...
+  ]
+ :c
+
+サンプル
+ aws iam list-users の結果から name と date だけ取り出す
+  code:aaa
+   $ aws iam list-users | jq ".Users[] | {name:.UserName, created_at:.CreateDate}"
+   {
+     "name": "user1",
+     "created_at": "2022-06-27T11:22:33Z"
+   }
+  :c
+ az role assignment list --all の結果から name と role だけ取り出す
+  code:元ネタ
+   $ az role assignment list --all 
+   [
+     {
+       "condition": null,
+       "description": null,
+       ……
+     },
+     ……
+   ]
+  :c
+  code:こうやって取り出す
+   $ az role assignment list --all | jq ".[] | {name:.principalName, role: .roleDefinitionName}"
+  :c

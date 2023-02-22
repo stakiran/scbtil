@@ -1,0 +1,22 @@
+jq一般論
+
+pythonと同じように書けば良い
+ ピリオド始め + python object + ピリオド繋ぎ
+ code:aaa
+  $ watch.bat
+  {
+      "StackEvents": [
+          {
+              "StackId": "arn:aws: cloudformation:...",
+              ……,
+              "ResourceStatus": "CREATE_IN_PROGRESS",
+              ……
+          }
+      ],
+      "NextToken": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  }
+ :c
+ code:aaa
+  $ watch.bat | jq ".StackEvents[0].ResourceStatus"
+  "CREATE_COMPLETE"
+ :c
