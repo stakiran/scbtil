@@ -1,0 +1,17 @@
+GitLabとpushトリガーで連携する
+ 1: jenkinsジョブ側でBuild when a change is pushed to GitLab.を使う
+  GitLab webhook URLはメモしとく
+  Secret Tokenもつくっとえく
+ 2: gitlab側でintegration > webhookをつくる
+  このとき、webhook urlとsecret tokenを入れる
+  設定したら、同上、Testを撃ってみる
+   権限足りてるなら200 OKが出るはず
+
+GitLabのリポジトリURLの末尾には.gitが必要
+ これがないと jenkins 側で clone が失敗する
+
+ジョブのつくりかた
+ フリースタイルが（すっきりしてて一から書けるので）良い
+ スクリプトはシェルスクリプトでいい
+ 環境がどうなっているかを把握するコマンドを撃ってみると良い
+  [ビルド環境の中身を見るときに使うコマンドたち]
