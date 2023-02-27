@@ -1,0 +1,20 @@
+苦手🐰
+
+1 クライアント側
+ teratermの設定
+  設定 > ssh > ハートビート
+  設定 > tcpip > keep-alive
+2 サーバー側
+ code:terminal
+  $ cat /etc/ssh/sshd_config | grep -i client
+  ClientAliveInterval 120
+  ClientAliveCountMax 3 
+ code:c
+ ClientAliveIntervalは生死確認を行う頻度。0だと「しない」なので秒数後に死ぬ
+ ClientAliveCountMaxは何回死んでたら死んだとみなすか。
+ よくわかってねえんだが🐰
+  120*3 = 360秒= 6分保生きるってこと？
+
+[SSHが超短時間で切断される - Qiita https://qiita.com/Ki2neudon/items/cf3cfe482a38857119e1#2019-12-09-%E8%BF%BD%E8%A8%98]
+ パケットキャプチャしてみたら動作不安定でよーわからんって話
+ クライアント側、sshハートビートを8秒くらいにしたら死ななくなったって書いてる
