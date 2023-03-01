@@ -1,0 +1,18 @@
+入手
+ readmeに書いてるのをshの変数でちょっと見やすくした程度
+ code:sh
+  export CURL_TIMEOUT_SEC=5
+  export SYFT_INSTALLER_URL="https://raw.githubusercontent.com/anchore/syft/main/install.sh"
+  export COPY_DESTINATION_DIR=syft
+  curl -m ${CURL_TIMEOUT_SEC} -sSfL ${SYFT_INSTALLER_URL} | sh -s -- -b ${COPY_DESTINATION_DIR}
+ :c
+ `${COPY_DESTINATION_DIR}/syft`にバイナリがくる
+
+実行
+ code:sh
+  export SYFT_BIN_RELATIVE_PATH=${COPY_DESTINATION_DIR}/syft
+  export SCAN_TARGET_DIR=src/modules
+  export OUTPUT_FORMAT=spdx-json
+  export OUTPUT_FILENAME=syft_spdx.json
+  ${SYFT_BIN_RELATIVE_PATH} ${SCAN_TARGET_DIR} -o ${OUTPUT_FORMAT} > ${OUTPUT_FILENAME}
+ :c
