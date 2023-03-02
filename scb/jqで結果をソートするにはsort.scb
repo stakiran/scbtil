@@ -1,0 +1,4 @@
+単に sort でフィルタすればいいだけ
+ code:aaa
+  $ cat trivy_sorted.json | jq "[.packages[] | {name:.name} | flatten[]] | sort"
+ :c
