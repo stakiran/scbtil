@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [synopsys detect]
  [Teamsでメッセージの編集ができないときは設定を疑う]
  [例外や異常系をどう処理するかを決めるためにまずは整理する]
  [curl]
@@ -50,7 +51,6 @@ week大して意味なさそうなので廃止
  [microsoft listsの列を削除する]
 2022/12/12w
  [pythonでremove duplicate of list]
- [BlackDuckのSynopsys Detectを使う]
  [jqで重複除去するにはunique]
  [jqでjsonのpretty print]
  [windowsでstderrをstdoutにリダイレクト]

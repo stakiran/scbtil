@@ -1,0 +1,18 @@
+notes
+ [BlackDuckのSynopsys Detectを使う]
+---
+
+pass
+ `(install-dir)\synopsys\detect\Synopsys Detect\Synopsys Detect.exe`
+
+プロパティ設定まわり
+ Windows版のexeだと環境変数からなら使える
+  ❌detect.accuracy.required=NOE
+  🔴set DETECT_ACCURACY_REQUIRED=NONE
+  セットした後、そのターミナルでdetect.exeを起動すればいい
+
+プロキシ
+ detectは裏でスキャン対象のビルドを走らせる
+  パケマネの通信も行うのでプロキシ設定できてないと死ぬ
+   境変数にて伝搬させるしかない（detect側のプロキシ設定ではない）
+  https_proxyとかセットした状態でdetectを起動すればいい
