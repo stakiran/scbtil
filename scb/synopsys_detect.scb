@@ -1,18 +1,46 @@
 notes
  [BlackDuckのSynopsys Detectを使う]
+docs
+ [Synopsys Detect https://blackducksoftware.github.io/synopsys-detect/6.3.0/]
+  6.3で古いけど
+ https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=properties%2Fall-properties.html&_LANG=enus
+  8.6
 ---
 
-pass
- `(install-dir)\synopsys\detect\Synopsys Detect\Synopsys Detect.exe`
+path
+ `(install-dir)\Synopsys Detect\Synopsys Detect.exe`
 
 プロパティ設定まわり
  Windows版のexeだと環境変数からなら使える
-  ❌detect.accuracy.required=NOE
+  ❌detect.accuracy.required=NONE
   🔴set DETECT_ACCURACY_REQUIRED=NONE
   セットした後、そのターミナルでdetect.exeを起動すればいい
 
 プロキシ
  detectは裏でスキャン対象のビルドを走らせる
-  パケマネの通信も行うのでプロキシ設定できてないと死ぬ
-   境変数にて伝搬させるしかない（detect側のプロキシ設定ではない）
-  https_proxyとかセットした状態でdetectを起動すればいい
+  このとき（スキャン対象側のビルドで）パケマネの通信も行うのでプロキシ設定できてないと死ぬ
+  が、detectのプロキシ設定からは伝搬しない
+  どうする？
+   環境変数にて伝搬させるしかない（detect側のプロキシ設定ではない）
+   https_proxyとかセットした状態でdetectを起動すればいい
+
+コマンドライン
+ `java -jar (install-dir)\Synopsys Detect\resources\resources\build\detect\synopsys-detect.jar`
+ 以下は実行例
+  プロキシはhttp_proxy環境変数にて
+  事前にtokenをつくっておく
+  タイムアウト長いのはうざいので手短に
+ code:実行例、改行して記した
+  $ proxy
+  Result of "set | findstr HTTP"
+  HTTPS_PROXY=http://SERVER:PORT
+  HTTP_PROXY=http://SERVER:PORT
+  
+  $ java -jar "(installdir)\Synopsys Detect\resources\resources\build\detect\synopsys-detect.jar"
+    --blackduck.api.token="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=="
+    --blackduck.url="https://SERVER"
+    --detect.timeout=10
+    --detect.accuracy.required="NONE"
+    --detect.project.name="pj1"
+    --detect.project.version.name="version1"
+ :c
