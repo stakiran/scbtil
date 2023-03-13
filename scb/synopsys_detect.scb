@@ -26,6 +26,9 @@ path
 
 コマンドライン
  `java -jar (install-dir)\Synopsys Detect\resources\resources\build\detect\synopsys-detect.jar`
+  嘘です、普通にsynopsis側が用意されてるのを使え、ドキュメント見たら普通に書いてあるべ🐰
+   https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-detect/
+  とはいえ、artifactoryからゲットできるjarと、detect guiが保つjarは中身は一緒(sha1sumで見た)
  以下は実行例
   プロキシはhttp_proxy環境変数にて
   事前にtokenをつくっておく
@@ -44,3 +47,12 @@ path
     --detect.project.name="pj1"
     --detect.project.version.name="version1"
  :c
+ 場合によってはSSL certも絡むだろう
+  [javaというかjvmの証明書ストアに証明書を追加する]
+
+トラブルシュート
+ Q: ERROR: Scan failed: [An internal server error occurred while processing the scan. (can't parse argument が出る
+  Ans: たぶん project name か project version にスペースが入っている
+  そのせいで内部的なコマンドラインで引数展開が上手く行ってない
+  なので当該の値を明示的に `""` で囲んでやることで、内部的にも上手くいくようにしてあげる
+ 
