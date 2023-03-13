@@ -1,0 +1,14 @@
+java製のアプリがhttps通信している場合、sslエラーを通す方法は以下二つ
+ 1: そのアプリが持ってる「SSLは無視する」的なオプションを使う
+ 2: そのアプリのソースコードを改修して、SSLを無視させる
+ 3: JVMに、そのアプリの証明書をimportする
+
+ここでは3 on Windows
+ code:path通ってるならkeytoolダイレクトでもいい
+  %java_home%\bin\keytool -importcert -alias 適当な名前 -cacerts -file cerファイルのパス
+ :c
+ パスワードはcacert（jvmの証明書ストア）のもの
+  デフォは`changeit`
+  [総務省 電波利用 電子申請・届出システム | JREへの証明書の登録 https://www.denpa.soumu.go.jp/public/help/step1_6.html]
+
+使い方は `-help` で見ていけばわかる

@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [javaというかjvmの証明書ストアに証明書を追加する]
  [python requests]
  [synopsys detect]
  [Teamsでメッセージの編集ができないときは設定を疑う]
