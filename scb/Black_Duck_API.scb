@@ -1,0 +1,73 @@
+study
+ [python_requests]の使い方も兼ねる
+ 正直公式クライアントがあるのでそのソース見るのが早い
+  https://github.com/blackducksoftware/hub-rest-api-python
+ 製品には REST API ガイドもあるので熟読するのでも良い
+point
+ トークンは事前に black duck web から発行しておく
+ authorization は header に書く、かつ`token `みたいなprefixが要る
+ 基本的に `_meta` の下にぶら下がってる関連リンクから endpoint を取っていくのが楽
+
+code:認証と試しになにかGETしてみるところまで.py
+ import requests
+
+ # func は print とかするラッパーだと思ってもらえれば
+ import func
+
+ proxies = {
+   "http": "...",
+   "https": "...",
+ }
+
+ URL = 'https://...'
+ token = '...'
+
+ # 認証して bearerToken を得る。
+ headers = {
+     'Authorization': f'token {token}'
+ }
+ r = requests.post(f'{URL}/api/tokens/authenticate', proxies=proxies, headers=headers)
+ if r.status_code!=200:
+     func.print_request(r)
+     exit(0)
+ d = r.json()
+ bearerToken = d['bearerToken']
+ expirationMsec = int(d['expiresInMilliseconds'])
+ expirationMin = expirationMsec/(1000*60)
+ print(f'bearer token expiration: {expirationMin} minutes.')
+
+ # 以下はテストとして、特定の project version の endpoint を得るまで。
+
+ headers = {
+     'Authorization': f'bearer {bearerToken}'
+ }
+
+ r = requests.get(f'{URL}/api/projects', proxies=proxies, headers=headers)
+ d = r.json()
+ items = d['items']
+ target_projectname = 'project1'
+ target_item = None
+ for item in items:
+     if item['name'] != target_projectname:
+         continue
+     target_item = item
+     break
+ if not target_item:
+     func.error(f'No project found: {target_projectname}')
+
+ prefix = item['_meta']['href']
+ body = '/versions'
+ next_endpoint = f'{prefix}{body}'
+ r = requests.get(next_endpoint, proxies=proxies, headers=headers)
+ d = r.json()
+ items = d['items']
+ target_projectversionname = 'x.y.z'
+ target_item = None
+ for item in items:
+     if item['versionName'] != target_projectversionname:
+         continue
+     target_item = item
+     break
+ if not target_item:
+     func.error(f'No project version found: {target_projectversionname}')
+:c
