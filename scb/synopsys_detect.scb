@@ -10,6 +10,9 @@ docs
 path
  `(install-dir)\Synopsys Detect\Synopsys Detect.exe`
 
+log
+ `%appdata%\Synopsys Detect\results\runs`
+
 プロパティ設定まわり
  Windows版のexeだと環境変数からなら使える
   ❌detect.accuracy.required=NONE
