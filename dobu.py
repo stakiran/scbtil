@@ -12,7 +12,7 @@ def parse_arguments():
     )
 
     parser.add_argument('--input-single', default=None)
-    parser.add_argument('-i', '--input-directory', default=False)
+    parser.add_argument('-i', '--input-directory', default=None)
 
     parser.add_argument('-o', '--output-directory', default=None)
 
