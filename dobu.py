@@ -19,6 +19,8 @@ def parse_arguments():
     parser.add_argument('--html-stylesheet', default=None)
     parser.add_argument('--html-template', default=None)
 
+    parser.add_argument('--debug-display-parsee-filename', default=False, action='store_true')
+
     args = parser.parse_args()
     return args
 
@@ -1050,6 +1052,8 @@ if __name__ == "__main__":
 
     physical_pages = []
     for target_filepath in target_filepathes:
+        if args.debug_display_parsee_filename:
+            print(f'{target_filepath}...')
         page = converter.filepath2page(target_filepath)
         physical_pages.append(page)
 
