@@ -748,9 +748,22 @@ class Network:
         DUMMY = None
         pageparser = PageParser(DUMMY)
 
+        # 2種類のpagename問題のせいで、同じpageに2回backmatterをつけるケースがありえる。
+        # {
+        #   "black duck" : page1,
+        #   "black_duck" : page1,
+        # }
+        # 
+        # 2回つけないよう重複チェックをここで行う。
+        # （Page インスタンス側に入れるのがかんたんだがスコープじゃない）
+        backmatter_appended = []
+
         for k in self._page_dict:
             v = self._page_dict[k]
             page = v
+
+            if page in backmatter_appended:
+                continue
 
             lines = []
 
@@ -771,6 +784,7 @@ class Network:
             pageparser.set_linepasser(linepasser)
             relation_links_content_by_page = pageparser.parse()
             page.extend_as_backmatter(relation_links_content_by_page)
+            backmatter_appended.append(page)
 
 class Renderer:
     def __init__(self, page):
