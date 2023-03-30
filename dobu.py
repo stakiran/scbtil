@@ -699,6 +699,7 @@ class Network:
                 self._physicalpage_dict[k] = v
 
         self._pages = []
+        self._page_dict = {}
         for pagename in self._pagename_dict.keys():
             is_physical = pagename in self._physicalpage_dict
             is_ghost = not is_physical
@@ -710,14 +711,9 @@ class Network:
                 page.name = pagename
             else:
                 raise RuntimeError
-            self._pages.append(page)
 
-        # あとはここ……🐰
-        self._page_dict = {}
-        for page in self._pages:
-            k = page.name
-            v = page
-            self._page_dict[k] = v
+            self._pages.append(page)
+            self._page_dict[pagename] = page
 
     @property
     def page_dict(self):
