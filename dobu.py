@@ -663,7 +663,10 @@ class Network:
          3:2を走査する、このとき、
           1と照合すれば、そのページ名がghostなのかどうかがわかる
           ghostの場合、まだインスタンスがないのでつくる
-         4:3にてページインスタンスの一覧と辞書をつくる '''
+         4:3にてページインスタンスの一覧と辞書をつくる
+         
+         ただし「2種類のpagename問題」があるのでややこしい小細工が挟まっている……
+         '''
         self._physicalpage_dict = {}
         for page in self._physical_pages:
             pagename = page.name
@@ -682,6 +685,18 @@ class Network:
                 linkee_pagename = link.text
                 k = linkee_pagename
                 self._pagename_dict[k] = DUMMY
+                # self._physical_pages 内の pagename はファイル名ベースなので correct されている。
+                # が、実際のリンクは correct されずに書かれている(2種類のpagename問題)。
+                # 例: 前者はBlack_Duck_API.scb、後者は[Black Duck API]
+                #
+                # 1: このままだと後者が ghost page 判定されるので、後者の名前も key として追加しておく
+                #
+                # 2: ただしこの時点で ghost page にあたってしまう可能性もある(KeyError)ので回避する
+                k_corrected = get_corrected_filename(k)
+                if not k_corrected in self._physicalpage_dict:
+                    continue
+                v = self._physicalpage_dict[k_corrected]
+                self._physicalpage_dict[k] = v
 
         self._pages = []
         for pagename in self._pagename_dict.keys():
@@ -690,11 +705,14 @@ class Network:
 
             if is_physical:
                 page = self._physicalpage_dict[pagename]
-            if is_ghost:
+            elif is_ghost:
                 page = Page(is_ghost=True)
                 page.name = pagename
+            else:
+                raise RuntimeError
             self._pages.append(page)
 
+        # あとはここ……🐰
         self._page_dict = {}
         for page in self._pages:
             k = page.name
