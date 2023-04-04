@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [pyenv]
  [Black Duck API]
  [javaというかjvmの証明書ストアに証明書を追加する]
  [python requests]

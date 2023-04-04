@@ -1,0 +1,16 @@
+pyenv versions
+ インストール済の確認
+
+pyenv install 3.11.0
+pyenv uninstall 3.11.0
+ install時にctrl+cで中断した場合はゴミのままinstalledになるので、いったんuninstallすればいい
+
+pyenv local 3.11.0
+ 使うバージョンを選択する
+
+普段使いとのバッティングをなくしたい for windows
+ PATHからは消しておく
+ 使うときに以下のように毎回pathの先頭に追加する
+ code:bat
+  set path=%userprofile%\.pyenv\pyenv-win\bin;%userprofile%\.pyenv\pyenv-win\shims;%path%
+ :c
