@@ -16,3 +16,16 @@
   export OUTPUT_FILENAME=syft_spdx.json
   ${SYFT_BIN_RELATIVE_PATH} ${SCAN_TARGET_DIR} -o ${OUTPUT_FORMAT} > ${OUTPUT_FILENAME}
  :c
+
+実行 for windows
+ code:bat
+  @echo off
+  setlocal
+
+  set SYFT_BIN_RELATIVE_PATH=syft.exe
+  set SCAN_TARGET_DIR=node_modules/
+  set OUTPUT_FORMAT=spdx-json
+  set OUTPUT_FILENAME=sbom_by_syft.json
+
+  %SYFT_BIN_RELATIVE_PATH% %SCAN_TARGET_DIR% -o %OUTPUT_FORMAT% > %OUTPUT_FILENAME%
+ :c

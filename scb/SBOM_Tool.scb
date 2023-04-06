@@ -1,0 +1,12 @@
+
+code:bat
+ @echo off
+ setlocal
+
+ set SBOM_OUTPUT_DIR=out_for_sbomtool/
+ set SCAN_DIR=node_modules/
+
+ sbom-tool-win-x64.exe Generate -b %SBOM_OUTPUT_DIR% -bc %SCAN_DIR% -pn "mytool1" -pv "ver1.2.3" -ps "nanashi_no_gonbee" -nsb "http://www.dummy.gonbee.com/"
+:c
+
+output dirに`_manifest`フォルダを生成して、その中に固定ファイル名で出力する。ちょっと融通利かない。
