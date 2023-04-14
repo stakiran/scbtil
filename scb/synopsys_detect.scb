@@ -6,6 +6,8 @@ docs
 src
  https://github.com/blackducksoftware/synopsys-detect/tree/master/detectable/src/main/java/com/synopsys/integration/detectable/detectables
  https://github.com/blackducksoftware/synopsys-detect/tree/89898576fe4f2d06ab25204effe3e2fd2c52c32d/documentation/src/main/markdown/packagemgrs
+supported language
+ https://www.synopsys.com/content/dam/synopsys/sig-assets/datasheets/blackduck-sca-ds-ul.pdf
 ---
 
 path
