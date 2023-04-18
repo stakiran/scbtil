@@ -1,0 +1,6 @@
+拡張子は .kts
+
+Groovyよりも新しい記法
+ コマンドラインで実行できる kotlin 記法
+ 違いとしては、単に書きやすくなったり厳密に書かせたりしているだけっぽいか？🐰
+ [ビルド構成を Groovy から KTS に移行する  |  Android デベロッパー  |  Android Developers https://developer.android.com/studio/build/migrate-to-kts?hl=ja]

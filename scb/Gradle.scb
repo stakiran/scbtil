@@ -1,0 +1,34 @@
+とりあえず依存関係指定まわりが知りたい
+ build.gradleに書く
+ dependenciesブロックに書く
+ 内部的にはconfigrationsオブジェクトで管理されているらしい
+  eachからのprintln（をするtaskを定義する）などで見れる
+  jarファイルのパスが出てるね🐰
+ 取得先は Maven central や jCenter などを指定できる模様
+ [多分わかりやすいGradle入門 | SIOS Tech. Lab https://tech-lab.sios.jp/archives/9500#buildgradle]
+
+拡張子 .kts ってなんだ？
+ [Kotlin Script]だそうだ
+
+基本的には[Maven]との互換性がある
+ リポジトリもそうだし、lifecycleもそうだし、src/の構造も同じみたい🐰
+
+[KotlinとGradleで始めるモダンなビルド環境 - ISID テックブログ https://tech.isid.co.jp/entry/2022/08/31/Kotlin%E3%81%A8Gradle%E3%81%A7%E5%A7%8B%E3%82%81%E3%82%8B%E3%83%A2%E3%83%80%E3%83%B3%E3%81%AA%E3%83%93%E3%83%AB%E3%83%89%E7%92%B0%E5%A2%83]
+ scoopでinstallできる
+ 1 テンプレコマンドでテンプレつくる
+ 2 build.gradle.kts書く
+ 3 ソース書いたりして
+ 4 gradle build すると jar がつくられる
+ バージョンの値をいちいち書き換えるのはだるいので、プラグインを使うと良い
+  me.qoomon.git-versioning
+  これはgit tagでつけたタグ名を使ってくれる
+ [Fat Jar]のつくりかたもある
+  Gradle Shadowプラグイン
+ 処理の切り出しはローカルプラグインとして切り出す感じになるっぽい🐰
+
+gradle.properties
+ https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+
+commandline options
+ [Command-line options | Gradle Effective Implementation Guide https://subscription.packtpub.com/book/web-development/9781849518109/1/ch01lvl1sec14/command-line-options]
+ 基本的にタスク名指定するので、オプションは全体的にタスクを実行する際のオプションと言える

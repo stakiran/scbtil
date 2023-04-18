@@ -1,0 +1,19 @@
+[Windows 10 で Python ファイル実行時にコマンドライン引数が渡されない件 - stamemo https://stakiran.hatenablog.com/entry/2019/10/29/184757]
+ 昔の俺、GJ
+
+code:引用
+レジストリをいじる。
+
+HKEY_CLASSES_ROOT\Applications\python.exe\shell\open\command キー
+既定エントリ
+値を以下のように "%1" から %1 %* に変える。
+
+"D:\bin1\python374\python.exe" "%1"
+
+  ↓
+
+"D:\bin1\python374\python.exe" %1 %*
+ちなみに HKEY_CLASSES_ROOT\py_auto_file\shell\open\command をいじってもダメだった（assoc コマンドでは .py=py_auto_file なのだが）。
+
+参考: Windows is not passing command line arguments to Python programs executed from the shell - Stack Overflow
+:c

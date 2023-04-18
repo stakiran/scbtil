@@ -1,6 +1,9 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [Gradle]
+ [PATHとPATHEXTを通したPythonスクリxxxx.pyをxxxxで実行したときにコマンドライン引数が渡されない]
+ [Maven]
  [JVN]
  [SBOM Tool]
  [pyenv]
