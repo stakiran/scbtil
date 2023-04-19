@@ -1,6 +1,8 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [SPDX SBOMからpackagesのリストを得るjqコマンドライン]
+ [Log4jに対するSysnopsis Detect DETECTOR スキャンを通すまで]
  [Gradle]
  [PATHとPATHEXTを通したPythonスクリxxxx.pyをxxxxで実行したときにコマンドライン引数が渡されない]
  [Maven]

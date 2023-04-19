@@ -1,0 +1,23 @@
+[synopsys detect] detector mode のスキャンを log4j に対して適用したい
+
+context
+ java 17
+ log4j は 2.20
+ synopsis detect は 8.2.0
+
+以下が必要
+ javaのインストールと、javaがPATHに通ってること
+ mavenのインストールと、mvnがPATHに通ってること
+ JDK のディレクトリを JAVA_HOME に設定
+ プロキシを通す
+  detectのdetectorが、内部的に（log4jが持ってる）mvnw `\log4j\mvnw.cmd dependency:tree` を叩く
+  ここで通信が走るのでプロキシ通ってないとタイムアウトになる
+  以下のとおり`JDK_JAVA_OPTIONS`を使った🐰
+   環境次第だろうがhttpだけだと足らないのでhttpsも一緒に
+
+バッチファイルのラッパーとしては以下のように
+ code:bat
+set JDK_JAVA_OPTIONS=-Dhttp.proxyHost=XXXX -Dhttp.proxyPort=XXXX -Dhttps.proxyHost=XXXX -Dhttps.proxyPort=XXXX
+
+java %javaoptions% -jar "%detect_jarfile_path%" --blackduck.api.token="%token%" --blackduck.url=%url% --detect.timeout=%timeoutsec% --detect.project.name="%project%" --detect.project.version.name="%projectversion%" --detect.tools=DETECTOR --detect.source.path=%targetpath% > %stdout_logfilename%
+ :c

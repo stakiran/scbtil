@@ -1,0 +1,37 @@
+スクリ
+ code:generator.bat
+  @echo off
+  setlocal
+
+  rem Do not give extension.
+  rem 
+  rem O   your-spdx-sbom-file
+  rem X   your-spdx-sbom-file.json
+  set target_sbomfile=%1
+
+  set target_sbomfile_full=%target_sbomfile%.json
+
+  if exist "%target_sbomfile_full%" (
+      rem
+  ) else (
+      echo target_sbomfile DOES NOT EXISTS: %target_sbomfile_full%
+      pause
+      exit /b 1
+  )
+
+  jq . %target_sbomfile_full% --sort-keys > 2_%target_sbomfile%.json
+  cat 2_%target_sbomfile%.json |  jq "[.packages[] | {name:.name} | flatten[]] | unique" > 3_%target_sbomfile%.txt
+ :c
+
+使い方
+ jqコマンドのインストールなど細かい点は割愛
+ code:usage
+  $ generator your-spdx-sbom-file.json
+  $ dir /b
+  2_your-spdx-sbom-file.json
+  3_your-spdx-sbom-file.txt
+  your-spdx-sbom-file.json
+ :c
+ 2_ と 3_ が生成される。
+ 2_ は pretty print しただけ
+ 3_ がお目当ての、packages[] 以下の name をリストアップしたやつ

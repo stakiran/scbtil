@@ -64,8 +64,4 @@ distribution系 from [Mavenとは何ぞや - Qiita https://qiita.com/ASHITSUBO/i
    https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/2.2.6.RELEASE/spring-boot-dependencies-2.2.6.RELEASE.pom
    properties に narsion が並んでいる🐰
 
-Maven repoからライブラリ名を探す
- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
- >Home » org.springframework.boot » spring-boot
- org.springframework.boot:spring-boot
- 
+[Maven repoからライブラリ名を探す]
