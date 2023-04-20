@@ -1,6 +1,8 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [gradleのキャッシュフォルダ]
+ [batでファイルやフォルダのパス存在を確認する]
  [SPDX SBOMからpackagesのリストを得るjqコマンドライン]
  [Log4jに対するSysnopsis Detect DETECTOR スキャンを通すまで]
  [Gradle]
