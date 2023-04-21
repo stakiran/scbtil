@@ -1,0 +1,5 @@
+https://github.com/spring-projects/spring-framework/issues/30355
+ [Gradle]が使われていて、内部的なプラグインとして `org.springframework.build.conventions` が使われているが、こいつの glob 処理が Windows に対応してない（Windowsではパスとして `*` が使えないから）、みたいなことを言っている。
+ 🐰のお試しでは、単に`gradlew`を実行しただけなので、こちらがわの対処どうこうは関係がない。
+  事実上、Windows非対応と言えるだろう。
+  もちろん自分で直せば別だけど（が、まだ何言ってるか理解してない）

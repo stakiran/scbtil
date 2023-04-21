@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [Spring-FrameworkはWindowsではビルドできない]
  [gradleのキャッシュフォルダ]
  [batでファイルやフォルダのパス存在を確認する]
  [SPDX SBOMからpackagesのリストを得るjqコマンドライン]
