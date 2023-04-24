@@ -1,0 +1,31 @@
+ from [NuGet]
+
+dotnet CLI
+ [dotnet CLI を使用して NuGet パッケージをインストールし、管理する | Microsoft Learn https://learn.microsoft.com/ja-jp/nuget/consume-packages/install-use-packages-dotnet-cli]
+ dotnet add package xxxx みたいな感じ
+ .csproj ファイルに xml で xxx の narsion が書き込まれる
+
+nuget.exe 
+ [NuGet CLI を使用して NuGet パッケージを管理する | Microsoft Learn https://learn.microsoft.com/ja-jp/nuget/consume-packages/install-use-packages-nuget-cli]
+ nuget installコマンド。指定ディレクトリにDLしてくる。.configファイルを指定して「リストアップしたパッケージ全部をDL」もできる。
+ nuget install
+ nuget list
+ nuget update
+ nuget restore。installは.configを変えるが、restoreは変えない
+  npm ciみたいなものか🐰
+  slnファイルも受け付けるらしい → `nuget restore MySolution.sl`
+ デフォのメタデータファイル名は packages.config みたい
+
+Visual Studio パッケージマネージャコンソール
+ [Visual Studio パッケージ マネージャー コンソールを使用して NuGet パッケージを管理する | Microsoft Learn https://learn.microsoft.com/ja-jp/nuget/consume-packages/install-use-packages-powershell]
+ GUIのコマンド入力欄で、powershellを打つ
+ Install-Package
+ Find-Package
+ Uninstall-Package
+ Get-Package
+  [NuGet Get-Package PowerShell リファレンス | Microsoft Learn https://learn.microsoft.com/ja-jp/nuget/reference/ps-reference/ps-ref-get-package]
+  localrepoにインストールされたもんすべて表示
+
+Visual Studio パッケージマネージャGUI
+ [NuGet パッケージ マネージャーを使用して Visual Studio にパッケージをインストールして管理する | Microsoft Learn https://learn.microsoft.com/ja-jp/previous-versions/]
+ VSCodeの拡張機能みたいなやつ

@@ -1,0 +1,6 @@
+[What is MUD? - Manufacturer Usage Description - Document - Cisco Developer https://developer.cisco.com/docs/mud/#!what-is-mud/what-is-mud]
+ >Manufacturer Usage Description (MUD)は、IETFによって定義された組み込みソフトウェア規格で、IoTデバイスメーカーが、デバイスがネットワークに接続する際に意図する通信パターンを含むデバイス仕様を広告することを可能にします。
+  要は /sbom にアクセスしたら[SBOM]情報が表示される、みたいなやつでしょ？🐰
+  MUD自体はSBOMに限定せず「device specification」としているが
+ 内部的には core mud process が介在してて、mud file server から取得してる
+  なんかあれだな、[MIB]みたい

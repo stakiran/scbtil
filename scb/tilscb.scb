@@ -1,6 +1,8 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [MUD]
+ [NuGet]
  [Spring-FrameworkはWindowsではビルドできない]
  [gradleのキャッシュフォルダ]
  [batでファイルやフォルダのパス存在を確認する]

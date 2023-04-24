@@ -1,6 +1,5 @@
 code:bat
 if exist "%targetpath%" (
-
     rem
 ) else (
     echo targetpath DOES NOT EXISTS: %targetpath%

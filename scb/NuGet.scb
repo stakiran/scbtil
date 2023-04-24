@@ -1,0 +1,55 @@
+
+ざっとまとめると
+ dotnetコマンドの場合は .csproj に書き込む
+ nugetコマンドの場合は packages.config に書き込む
+  .slnファイルも絡んでそうか？🐰
+
+what is nuget
+ https://learn.microsoft.com/ja-jp/nuget/what-is-nuget
+ .nupkg
+  >NuGet パッケージは、拡張子が .nupkg の 1 つの ZIP ファイルであり、コンパイル済みのコード (DLL)、そのコードに関連する他のファイル、パッケージのバージョン番号などの情報が記述されているマニフェストが含まれます。
+ ホストは nuget.org の他、プライベートホストも可能
+  >NuGet では、パブリック ホストの nuget.org に加えてプライベート ホストもサポートされるので、NuGet パッケージを使用して、組織またはワーク グループ専用のコードを共有できます。
+  [NuGetの利用手段]
+
+nuget.org
+ [NuGet Gallery | Home https://www.nuget.org/]
+
+https://www.nuget.org/packages/HmNetCOM 見てみる
+ hmnetcom.2.0.8.1.nupkg
+ 解凍すると、
+ code:tree
+  HMNETCOM.2.0.8.1
+  │  .signature.p7s
+  │  HmNetCOM.nuspec
+  │  icon.png
+  │  nuget.exe
+  │  [Content_Types].xml
+  │  
+  ├─build
+  │      HmNetCOM.props
+  │      HmNetCOM.targets
+  │      
+  ├─content
+  │      HmNetCOM.tt
+  │      
+  ├─contentFiles
+  │  └─any
+  │      └─any
+  │              HmNetCOM.tt
+  │              
+  ├─package
+  │  └─services
+  │      └─metadata
+  │          └─core-properties
+  │                  2d3fd2150f6c4715a87569bc1f75ce9c.psmdcp
+  │                  
+  └─_rels
+          .rels
+          
+ :c
+ コンテンツは .tt かなぁ
+  実際のソースコードが書いてある
+ props, targets, psmdcp, nuspec などは xml のメタデータ
+ p7s はバイナリ
+  電子署名みたいだ
