@@ -1,0 +1,27 @@
+ファイル
+ %userprofile%\.m2\settings.xml
+ ~/.m2/settings.xml
+
+記述
+ code:xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+    <proxies>
+      <proxy>
+        <id>myproxy_HTTPS</id>
+        <active>true</active>
+        <protocol>https</protocol>
+        <host>hogeproxy.co.jp</host>
+        <port>(port)</port>
+      </proxy>
+      <proxy>
+        <id>myproxy_HTTP</id>
+        <active>true</active>
+        <protocol>http</protocol>
+        <host>hogeproxy.co.jp</host>
+        <port>(port)</port>
+      </proxy>
+    </proxies>
+  </settings>
+ :c

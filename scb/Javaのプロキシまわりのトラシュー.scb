@@ -1,0 +1,20 @@
+Wrapperを見て使われてる環境変数を特定する
+ mvnwとかgradlewなど
+ バッチファイルやシェルスクリで記載されており、最終的に java を実行している
+ このときいろんな環境変数を見てるはず
+  MAVEN_OPT
+  GRADLE_OPT etc
+
+環境変数たち
+ MAVEN_OPT
+ GRADLE_OPT
+ [JDK_JAVA_OPTIONS]
+ ---
+ これらに `-D` で指定していく
+
+設定ファイルたち
+ Mavenの場合は .m2/settings.xml など
+  [Mavenのプロキシ設定]
+
+直接指定する
+ java.exe のコマンドラインとして、直接 `-D` を与える

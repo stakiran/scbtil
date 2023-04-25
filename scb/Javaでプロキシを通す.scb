@@ -1,0 +1,5 @@
+from [Log4jに対するSysnopsis_Detect_DETECTOR_スキャンを通すまで]
+ [JDK_JAVA_OPTIONS]を使っている
+ set JDK_JAVA_OPTIONS=-Dhttp.proxyHost=XXXX -Dhttp.proxyPort=XXXX -Dhttps.proxyHost=XXXX -Dhttps.proxyPort=XXXX
+
+[Javaのプロキシまわりのトラシュー]

@@ -1,6 +1,8 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [ctrl+windows+spaceでIME切り替えが発生する]
+ [mdatp]
  [MUD]
  [NuGet]
  [Spring-FrameworkはWindowsではビルドできない]

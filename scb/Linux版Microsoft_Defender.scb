@@ -1,0 +1,10 @@
+defender for endpoint
+
+止める
+ systemctl stop mdatp.service
+
+除外設定
+ mdatp exclusion process add --name java
+ mdatp exclusion folder add --path /user1/work/
+  サブフォルダ含めたければ末尾に `/` が要る
+ [Linux 上のMicrosoft Defender for Endpointの除外を構成して検証する | Microsoft Learn https://learn.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/linux-exclusions?view=o365-worldwide]
