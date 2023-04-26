@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [hs_err_pidXXXX.logはJavaVMが出すダンプファイル]
  [ctrl windows spaceでIME切り替えが発生する]
   これは実装甘くてHTML化しくじる(`+`はespaceしてないがURLとしては使えない) →[ctrl+windows+spaceでIME切り替えが発生する]
  [mdatp]
