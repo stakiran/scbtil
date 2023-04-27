@@ -1,6 +1,8 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [msbuild.exe]
+ [SenseNDR.exeのメモリ使用量がエグいので殺す]
  [hs_err_pidXXXX.logはJavaVMが出すダンプファイル]
  [ctrl windows spaceでIME切り替えが発生する]
   これは実装甘くてHTML化しくじる(`+`はespaceしてないがURLとしては使えない) →[ctrl+windows+spaceでIME切り替えが発生する]

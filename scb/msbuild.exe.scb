@@ -1,0 +1,10 @@
+入手
+ [MSBuild の使用 - MSBuild | Microsoft Learn https://learn.microsoft.com/ja-jp/previous-versions/]
+  [Download Visual Studio Tools - Install Free for Windows, Mac, Linux https://visualstudio.microsoft.com/ja/downloads/]
+   tools for visual studio > Build Tools for Visual Studio 2022
+
+path
+ "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe"
+
+MSBuild.exe XXXX.csproj -t:build
+MSBuild.exe XXXX.csproj -t:clean

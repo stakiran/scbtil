@@ -1,0 +1,10 @@
+"C:\Program Files\Windows Defender Advanced Threat Protection\SenseNdr.exe"
+
+少し調べた
+ [microsoft-365-docs/event-error-codes.md at public · MicrosoftDocs/microsoft-365-docs https://github.com/MicrosoftDocs/microsoft-365-docs/blob/public/microsoft-365/security/defender-endpoint/event-error-codes.md]
+  "Microsoft Defender for Endpoint Network Detection and Response"
+  [エンドポイントの検出および応答機能の概要 | Microsoft Docs https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/overview-endpoint-detection-response?view=o365-worldwide]
+ [デバイス検出の概要 | Microsoft Docs https://docs.microsoft.com/ja-jp/microsoft-365/security/defender-endpoint/device-discovery?view=o365-worldwide]
+  >. Basic discovery uses the SenseNDR.exe binary for passive network data collection and no network traffic will be initiated. 
+   基本的な探索では SenseNDR.exe が使われる
+   通信はしない

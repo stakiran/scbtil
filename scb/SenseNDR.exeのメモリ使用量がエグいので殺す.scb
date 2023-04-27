@@ -1,0 +1,7 @@
+[ProcessExplorer]で確認したら、private bytes の値がコイツだけ桁違いだった
+ Chrome より一桁多い
+殺した
+ taskkill /f /im sensendr.exe
+ そしたら 7.0 GB 使ってたメモリが 4.5GB にまで下がった
+
+[SenseNdr.exe]
