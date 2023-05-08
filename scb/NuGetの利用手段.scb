@@ -13,7 +13,7 @@ nuget.exe
  nuget update
  nuget restore。installは.configを変えるが、restoreは変えない
   npm ciみたいなものか🐰
-  slnファイルも受け付けるらしい → `nuget restore MySolution.sl`
+  slnファイルも受け付けるらしい → `nuget restore MySolution.sln`
  デフォのメタデータファイル名は packages.config みたい
 
 Visual Studio パッケージマネージャコンソール

@@ -5,7 +5,6 @@ mvn installではない
 [How to simply download a JAR using Maven? - Stack Overflow https://stackoverflow.com/questions/7110114/how-to-simply-download-a-jar-using-maven]
  個別に指定しなきゃいけないものばかりでキツイ中、一気にできるのがあった
  [java - How to use Maven pom to download jar files only to a specific directory? - Stack Overflow https://stackoverflow.com/questions/7742252/how-to-use-maven-pom-to-download-jar-files-only-to-a-specific-directory]
-  mvn dependency:copy-dependencies -DoutputDirectory=OUTPUT_DIR
-  -DexcludeTransitive=true
+  mvn dependency:copy-dependencies -DoutputDirectory=OUTPUT_DIR -DexcludeTransitive=true
   これが良さそう
    各フォルダの下に OUTPUT_DIR/ をつくってそこに入れる感じ🐰

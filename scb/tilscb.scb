@@ -1,6 +1,7 @@
 [方針]
 
 week大して意味なさそうなので廃止
+ [topコマンドで更新秒数指定は-d 10で10秒など]
  [msbuild.exe]
  [SenseNDR.exeのメモリ使用量がエグいので殺す]
  [hs_err_pidXXXX.logはJavaVMが出すダンプファイル]
