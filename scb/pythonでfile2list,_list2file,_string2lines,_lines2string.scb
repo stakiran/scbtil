@@ -14,4 +14,14 @@ def lines2string(lines):
 def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
+
+def file2str(filepath):
+    ret = ''
+    with open(filepath, encoding='utf8', mode='r') as f:
+        ret = f.read()
+    return ret
+
+def str2file(filepath, s):
+    with open(filepath, encoding='utf8', mode='w') as f:
+        f.write(s)
 :c
